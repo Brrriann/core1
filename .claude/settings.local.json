@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --version)",
+      "Bash(npm --version)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(where npx)",
+      "Bash(where node)",
+      "Bash(where npm)",
+      "Bash(where serve)",
+      "Bash(where http-server)",
+      "Bash(python -c \"import sys; print\\(sys.version\\)\")",
+      "Bash(where python)",
+      "WebFetch(domain:github.com)",
+      "Bash(npm install -g uipro-cli)",
+      "Bash(uipro --version)",
+      "Bash(uipro.cmd --version)",
+      "Bash(uipro.cmd init --ai claude)",
+      "Bash(python .claude/skills/ui-ux-pro-max/scripts/search.py \"premium detective agency investigation noir dark luxury security professional\" --design-system -p \"코어탐정사무소\" -f markdown)",
+      "Bash(C:/Users/offic/AppData/Local/Microsoft/WindowsApps/python.exe \"C:/Users/offic/OneDrive/바탕 화면/CORETAMJUNG/.claude/skills/ui-ux-pro-max/scripts/search.py\" \"premium detective agency investigation noir dark luxury security professional\" --design-system -p \"코어탐정사무소\")",
+      "Bash(py -3 --version)",
+      "Bash(/c/Users/offic/AppData/Local/Microsoft/WindowsApps/python3.exe --version)",
+      "Bash(python3 scripts/search.py \"detective agency noir prestige elegant luxury\" --domain typography --stack html-tailwind)",
+      "Bash(identify \"C:\\\\Users\\\\offic\\\\OneDrive\\\\바탕 화면\\\\CORETAMJUNG\\\\PROVE\\\\1.png\")",
+      "Bash(git init)",
+      "Bash(git config user.name \"Brriann\")",
+      "Bash(git config user.email \"your-email@example.com\")"
+    ]
+  }
+}

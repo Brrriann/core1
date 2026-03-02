@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코어탐정사무소 | Premium Detective Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;900&family=Audiowide&display=swap" rel="stylesheet">
+    <style>
+        /* ════════════════════════════════════════════
+           DESIGN SYSTEM — Noir Prestige
+           UI/UX Pro Max: Dark OLED + Glassmorphism
+           + Exaggerated Minimalism + Trust & Authority
+        ════════════════════════════════════════════ */
+        :root {
+            --gold:          #C9A84C;
+            --gold-bright:   #E2BE6E;
+            --gold-dim:      rgba(201, 168, 76, 0.10);
+            --gold-border:   rgba(201, 168, 76, 0.20);
+            --gold-glow:     rgba(201, 168, 76, 0.18);
+
+            --black:         #070707;
+            --dark-surface:  #0C0C0C;
+            --dark-card:     rgba(255, 255, 255, 0.028);
+            --glass-border:  rgba(255, 255, 255, 0.065);
+
+            --text-primary:  #EDE8DF;
+            --text-secondary:rgba(237, 232, 223, 0.52);
+            --text-muted:    rgba(237, 232, 223, 0.28);
+
+            --corp-bg:       #081322;
+            --corp-accent:   #3B82F6;
+            --corp-dim:      rgba(59, 130, 246, 0.12);
+            --corp-border:   rgba(59, 130, 246, 0.22);
+
+            --red-bg:        #110303;
+            --red-accent:    #EF4444;
+            --red-dim:       rgba(239, 68, 68, 0.12);
+            --red-border:    rgba(239, 68, 68, 0.22);
+        }
+
+        /* ── Reset ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            background-color: var(--black);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background-color 0.95s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Film-grain overlay for luxury dark feel */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.028;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 160px 160px;
+        }
+
+        section {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 140px 0;
+        }
+
+        /* ══ NAVIGATION ══ */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100000;
+        }
+        .nav-inner {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 0 40px;
+            height: 68px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-glass {
+            background: rgba(7, 7, 7, 0.88);
+            backdrop-filter: blur(32px) saturate(160%);
+            -webkit-backdrop-filter: blur(32px) saturate(160%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+            box-shadow: 0 1px 0 rgba(255,255,255,0.025), 0 6px 40px rgba(0,0,0,0.65);
+        }
+        .nav-link {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 13.5px;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: color 0.22s, transform 0.22s;
+            text-decoration: none;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -3px; left: 0; right: 0;
+            height: 1px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link:hover { color: var(--text-primary); transform: translateY(-1px); }
+        .nav-link:hover::after { transform: scaleX(1); }
+        .nav-link.nav-cta { color: var(--gold); font-weight: 600; }
+        .nav-link.nav-cta::after { background: var(--gold); transform: scaleX(1); opacity: 0.5; }
+        .nav-phone {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: var(--gold);
+        }
+
+        /* ══ SIDE NAVIGATION ══ */
+        #side-nav {
+            position: fixed;
+            left: 32px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        @media (max-width: 1100px) { #side-nav { display: none; } }
+        .nav-dot {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px; height: 22px;
+        }
+        .dot-circle {
+            width: 5px; height: 5px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-dot:hover .dot-circle {
+            background: rgba(201,168,76,0.55);
+            transform: scale(2);
+        }
+        .nav-dot.active .dot-circle {
+            background: var(--gold);
+            transform: scale(3);
+            box-shadow: 0 0 10px rgba(201,168,76,0.8), 0 0 22px rgba(201,168,76,0.35);
+        }
+
+        /* ══ HERO ══ */
+        #hero-bg-img {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=2070') center / cover no-repeat;
+            z-index: 0;
+            filter: brightness(0.42) saturate(0.65);
+            will-change: transform;
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            z-index: 1;
+            background:
+                linear-gradient(to bottom, rgba(7,7,7,0.25) 0%, transparent 45%, rgba(7,7,7,0.85) 100%),
+                linear-gradient(to right, rgba(7,7,7,0.6) 0%, transparent 60%);
+        }
+        .glare-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 22px 7px 16px;
+            border: 1px solid var(--gold-border);
+            border-radius: 100px;
+            background: var(--gold-dim);
+            backdrop-filter: blur(12px);
+            margin-bottom: 2.2rem;
+            opacity: 0;
+        }
+        .badge-pulse {
+            width: 6px; height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+            animation: badge-blink 2.2s ease-in-out infinite;
+        }
+        @keyframes badge-blink { 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+        .badge-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        #hero-title {
+            font-family: 'Playfair Display', serif;
+            line-height: 1.18;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            font-size: clamp(2.6rem, 5.8vw, 5.8rem);
+            margin-bottom: 1.6rem;
+        }
+        .char { display: inline-block; opacity: 0; transform: translateY(26px) rotateX(-90deg); will-change: transform, opacity; }
+        .gold-point {
+            color: var(--gold);
+            font-style: normal;
+            text-shadow: 0 0 80px rgba(201,168,76,0.22);
+        }
+
+        #hero-sub {
+            font-size: clamp(13px, 1.5vw, 15.5px);
+            color: var(--text-secondary);
+            line-height: 1.95;
+            font-weight: 300;
+            max-width: 520px;
+            margin: 0 auto;
+            opacity: 0;
+        }
+
+        /* Hero Stats Bar */
+        .hero-stats {
+            display: flex;
+            align-items: stretch;
+            max-width: 580px;
+            width: 100%;
+            margin: 2.8rem auto 0;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(24px);
+            overflow: hidden;
+            opacity: 0;
+        }
+        .hero-stat {
+            flex: 1;
+            padding: 20px 16px;
+            text-align: center;
+            position: relative;
+        }
+        .hero-stat + .hero-stat::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 16%; height: 68%;
+            width: 1px;
+            background: rgba(255,255,255,0.07);
+        }
+        .h-stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.33rem;
+            font-weight: 900;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 7px;
+            letter-spacing: -0.02em;
+        }
+        .h-stat-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 9.5px;
+            letter-spacing: 0.22em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* ══ INTRO VIDEO OVERLAY ══ */
+        #intro-video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--black);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        #intro-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @keyframes fadeOutVideo {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        /* ══ SECTION 1 — 신뢰의 증거 (DARK) ══ */
+        #sec-1 {
+            display: block;
+            padding: 140px 0;
+            background-color: var(--dark-surface);
+            align-items: unset;
+            justify-content: unset;
+        }
+        #sec-1 .inner {
+            max-width: 1420px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Section eyebrow */
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            opacity: 0;
+        }
+        .eyebrow-line {
+            width: 30px; height: 1px;
+            background: currentColor;
+            opacity: 0.6;
+            flex-shrink: 0;
+        }
+
+        /* Section title */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.6rem);
+            font-weight: 900;
+            line-height: 1.12;
+            letter-spacing: -0.025em;
+            opacity: 0;
+        }
+
+        /* Cert cards */
+        .cert-card {
+            position: relative;
+            height: 390px;
+            border-radius: 16px;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 28px;
+            color: white;
+            opacity: 0;
+            transform: translateY(48px) translateZ(0);
+            -webkit-transform: translateY(48px) translateZ(0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            cursor: pointer;
+            transition:
+                transform 0.5s cubic-bezier(0.2, 1, 0.2, 1),
+                box-shadow 0.5s ease;
+        }
+        .cert-card.is-visible:hover {
+            transform: translateY(-12px) translateZ(0) !important;
+            box-shadow: 0 32px 64px rgba(0,0,0,0.55);
+        }
+        .cert-card::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 18%, rgba(5,5,5,0.97) 100%);
+            z-index: 1;
+        }
+        .cert-content { position: relative; z-index: 2; }
+        .cert-num {
+            position: absolute;
+            top: -55px; right: -6px;
+            font-family: 'Playfair Display', serif;
+            font-size: 68px;
+            font-weight: 900;
+            font-style: normal;
+            color: var(--gold);
+            opacity: 0.075;
+            z-index: 2;
+            line-height: 1;
+            user-select: none;
+        }
+        .cert-title {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: white;
+        }
+        .cert-desc {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.75;
+            margin-bottom: 16px;
+        }
+        .inquiry-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 20px;
+            border-radius: 100px;
+            background: var(--gold-dim);
+            border: 1px solid var(--gold-border);
+            color: var(--gold);
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: background 0.28s, color 0.28s, transform 0.28s;
+        }
+        .cert-card.is-visible:hover .inquiry-btn {
+            background: var(--gold);
+            color: #060606;
+            transform: translateX(5px);
+        }
+
+        /* ══ CASE SECTIONS (sec-2/3/4) ══ */
+        .case-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 22px;
+            width: 100%;
+        }
+        @media (min-width: 768px) { .case-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        /* Section header */
+        .section-header { margin-bottom: 60px; }
+        .section-tag-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+        .section-tag-line {
+            width: 36px; height: 1px;
+            flex-shrink: 0;
+        }
+        .section-tag {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+        }
+        .section-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.9rem, 3.8vw, 3.4rem);
+            font-weight: 900;
+            letter-spacing: -0.025em;
+            line-height: 1.1;
+            color: white;
+            display: inline-block;
+            cursor: default;
+            transition: transform 0.38s cubic-bezier(0.2, 1, 0.2, 1);
+        }
+        .section-h2:hover { transform: translateX(10px); }
+
+        /* Case card */
+        .case-card {
+            opacity: 0;
+            transform: translateY(30px);
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.2, 1, 0.2, 1);
+        }
+        .case-card.is-visible:hover { transform: translateY(-11px) !important; }
+        .case-thumb {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            border-radius: 12px;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 15px;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transition: box-shadow 0.35s;
+        }
+        .case-card.is-visible:hover .case-thumb {
+            box-shadow: 0 22px 44px rgba(0,0,0,0.52);
+        }
+        .case-thumb::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(5,5,5,0.94) 0%, transparent 52%);
+        }
+        .case-tag {
+            position: absolute;
+            top: 14px; right: 14px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            z-index: 10;
+            transition: transform 0.28s;
+        }
+        .case-card.is-visible:hover .case-tag { transform: scale(1.06); }
+        .case-result-overlay {
+            position: absolute;
+            bottom: 14px; right: 14px;
+            text-align: right;
+            z-index: 10;
+        }
+        .result-type {
+            font-size: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            margin-bottom: 2px;
+            opacity: 0.85;
+        }
+        .result-status {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.01em;
+        }
+        .case-info { padding: 0 2px; }
+        .case-title {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 15.5px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            line-height: 1.55;
+            transition: color 0.28s;
+        }
+        .case-card.is-visible:hover .case-title { color: var(--gold); }
+        .case-tags {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.75;
+            word-break: keep-all;
+            letter-spacing: 0.02em;
+        }
+
+        /* corp / family / vvip tag colors */
+        #sec-2 .case-tag { background: rgba(59,130,246,0.82); color: white; }
+        #sec-2 .result-type { color: #93C5FD; }
+        #sec-3 .case-tag { background: rgba(239,68,68,0.82); color: white; }
+        #sec-3 .result-type { color: #FCA5A5; }
+        #sec-4 .case-tag { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold-border); }
+        #sec-4 .result-type { color: var(--gold-bright); }
+
+        /* ══ SEC-5 — TESTIMONIALS ══ */
+        #sec-5 {
+            display: block;
+            padding: 140px 0 160px;
+        }
+        #sec-5::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.052) 0%, transparent 58%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        #sec-5 > * { position: relative; z-index: 1; }
+
+        .testi-marquee-wrap { overflow: hidden; position: relative; }
+        .testi-marquee-wrap::before,
+        .testi-marquee-wrap::after {
+            content: '';
+            position: absolute; top: 0; bottom: 0;
+            width: 200px;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .testi-marquee-wrap::before { left: 0; background: linear-gradient(to right, var(--black), transparent); }
+        .testi-marquee-wrap::after  { right: 0; background: linear-gradient(to left, var(--black), transparent); }
+
+        .testi-track {
+            display: flex; gap: 16px;
+            width: max-content;
+            padding: 10px 0;
+        }
+        .testi-track.row-1 { animation: marquee-l 58s linear infinite; }
+        .testi-track.row-2 { animation: marquee-r 58s linear infinite; margin-top: 16px; }
+        .testi-marquee-wrap:hover .testi-track { animation-play-state: paused; }
+        @keyframes marquee-l { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+        @keyframes marquee-r { from{transform:translateX(-50%)} to{transform:translateX(0)} }
+
+        .testi-card {
+            width: 345px;
+            flex-shrink: 0;
+            background: var(--dark-card);
+            border-radius: 16px;
+            padding: 28px;
+            position: relative;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transition: background 0.32s, transform 0.32s;
+            cursor: default;
+        }
+        .testi-card:hover {
+            background: rgba(201,168,76,0.048);
+            transform: translateY(-6px);
+        }
+        .testi-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 54px;
+            color: var(--gold);
+            opacity: 0.22;
+            line-height: 0.8;
+            margin-bottom: 14px;
+            display: block;
+        }
+        .testi-text {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 13px;
+            color: rgba(237,232,223,0.68);
+            line-height: 2;
+            font-weight: 300;
+            margin-bottom: 22px;
+        }
+        .testi-divider { width: 28px; height: 1px; background: var(--gold); opacity: 0.38; margin-bottom: 14px; }
+        .testi-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .testi-client {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        .testi-badge {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--gold);
+            background: var(--gold-dim);
+            border: 1px solid var(--gold-border);
+            padding: 3px 10px;
+            border-radius: 100px;
+            white-space: nowrap;
+            letter-spacing: 0.04em;
+        }
+
+        /* ══ BOTTOM BAR ══ */
+        #sticky-bottom-bar {
+            position: fixed;
+            bottom: 20px; left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 1160px;
+            background: rgba(7,7,7,0.95);
+            backdrop-filter: blur(32px) saturate(150%);
+            -webkit-backdrop-filter: blur(32px) saturate(150%);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-radius: 100px;
+            z-index: 200000;
+            padding: 8px 8px 8px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow:
+                0 24px 60px rgba(0,0,0,0.7),
+                0 1px 0 rgba(255,255,255,0.025) inset;
+        }
+        @keyframes pulse-gold {
+            0%,100% { transform:scale(1); box-shadow: 0 0 0 0 rgba(201,168,76,0.45); }
+            50%      { transform:scale(1.03); box-shadow: 0 0 18px 6px rgba(201,168,76,0); }
+        }
+        .bar-btn {
+            background: var(--gold);
+            color: #060606;
+            padding: 13px 28px;
+            border-radius: 100px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 8px;
+            white-space: nowrap;
+            animation: pulse-gold 2.8s ease-in-out infinite;
+            transition: background 0.22s, transform 0.22s;
+            letter-spacing: 0.015em;
+        }
+        .bar-btn:hover { background: white; animation-play-state: paused; transform: translateY(-1px); }
+        .blog-btn {
+            background: transparent;
+            color: rgba(237,232,223,0.48);
+            padding: 11px 22px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 100px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 500;
+            font-size: 13px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: background 0.22s, color 0.22s, border-color 0.22s;
+        }
+        .blog-btn:hover { background: rgba(255,255,255,0.05); color: var(--text-primary); border-color: rgba(255,255,255,0.14); }
+        .cta-group { display: flex; align-items: center; gap: 10px; }
+        .bar-info { display: flex; align-items: center; gap: 30px; }
+        .phone-link {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 0.06em;
+            transition: color 0.22s;
+        }
+        .phone-link:hover { color: white; }
+        .secure-status { display: flex; align-items: center; gap: 9px; }
+        .pulse-dot { position: relative; width: 7px; height: 7px; background: #22c55e; border-radius: 50%; flex-shrink: 0; }
+        .pulse-dot::after {
+            content: ''; position: absolute; inset: 0;
+            background: #22c55e; border-radius: 50%;
+            animation: p-ring 2.1s ease-out infinite;
+        }
+        @keyframes p-ring { 0%{transform:scale(0.7);opacity:1} 80%,100%{transform:scale(3.2);opacity:0} }
+        .enc-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 9.5px;
+            letter-spacing: 0.22em;
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            #sticky-bottom-bar {
+                bottom: 12px; padding: 14px 18px;
+                flex-direction: column; gap: 12px;
+                border-radius: 24px; width: calc(100% - 24px);
+            }
+            .cta-group { width: 100%; }
+            .bar-btn, .blog-btn { flex: 1; text-align: center; justify-content: center; }
+            .bar-info { gap: 18px; width: 100%; justify-content: center; }
+            .nav-inner { padding: 0 20px; }
+        }
+
+        /* ══ SEC-6: 검증 트러스트 갤러리 ══ */
+        #sec-6 { display: block; padding: 140px 0 200px 0; background-color: #000000; }
+        #sec-6 .inner { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+        .sec6-header { text-align: center; margin-bottom: 72px; }
+        .sec6-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: white; margin-bottom: 1.2rem; }
+        .sec6-eyebrow span { width: 28px; height: 1px; background: white; opacity: 0.6; }
+        .sec6-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 900; color: white; line-height: 1.15; }
+        .sec6-title em { color: var(--gold); font-style: normal; }
+        .prove-carousel-wrap {
+            width: 100%;
+            margin-top: 48px;
+            margin-bottom: 48px;
+        }
+        .prove-carousel-track {
+            display: grid;
+            grid-template-columns: repeat(3, 400px);
+            gap: 24px;
+            justify-content: center;
+            width: 100%;
+        }
+        .prove-card {
+            width: 400px;
+            height: 550px;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            transition: all 0.38s cubic-bezier(0.2,1,0.2,1);
+        }
+        .prove-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 60px rgba(201,168,76,0.4);
+        }
+        .prove-card-content {
+            text-align: center;
+            padding: 60px 40px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+        .prove-card-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: #3B82F6;
+            margin-bottom: 24px;
+        }
+        .prove-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #070707;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .prove-card-org {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+        .prove-card-action {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: #3B82F6;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 12px 24px;
+            border: 1.5px solid #3B82F6;
+            border-radius: 6px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .prove-card:hover .prove-card-action {
+            background: #3B82F6;
+            color: white;
+        }
+
+        /* 모바일 반응형 (768px 이하) */
+        @media (max-width: 768px) {
+            #sec-6 { padding: 80px 0 120px 0; }
+            #sec-6 .inner { padding: 0 20px; }
+            .prove-carousel-wrap { margin-top: 32px; margin-bottom: 32px; }
+            .prove-carousel-track {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                width: 100%;
+            }
+            .prove-card {
+                width: 100%;
+                max-width: 350px;
+                height: 420px;
+                border-radius: 16px;
+                background: white;
+                margin: 0 auto;
+            }
+            .prove-card-content {
+                padding: 40px 30px;
+                background: white;
+            }
+            .prove-card-number {
+                font-size: 36px;
+                margin-bottom: 16px;
+            }
+            .prove-card-title {
+                font-size: 18px;
+                margin-bottom: 8px;
+            }
+            .prove-card-org {
+                font-size: 12px;
+                margin-bottom: 24px;
+            }
+            .prove-card-action {
+                font-size: 11px;
+                padding: 10px 20px;
+            }
+        }
+
+        /* Lightbox */
+        .lightbox { position: fixed; inset: 0; z-index: 999999; background: rgba(4,4,4,0.95); display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-width: 88vw; max-height: 88vh; border-radius: 10px; object-fit: contain; }
+        .lightbox-close { position: absolute; top: 28px; right: 32px; font-size: 28px; color: var(--gold); cursor: pointer; background: none; border: none; font-family: 'Playfair Display', serif; line-height: 1; }
+
+        /* ══ SEC-7: 의뢰 절차 ══ */
+        #sec-7 { display: block; padding: 140px 0; background-color: #080E1C; }
+        #sec-7 .inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        .sec7-header { text-align: center; margin-bottom: 80px; }
+        .sec7-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--corp-accent); margin-bottom: 1.2rem; }
+        .sec7-eyebrow span { width: 28px; height: 1px; background: var(--corp-accent); opacity: 0.6; }
+        .sec7-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 900; color: white; line-height: 1.15; }
+        /* Pulse 애니메이션 (1초 스케일 = 4초 총 주기) */
+        @keyframes pulseCard {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 64px 80px;
+            align-items: center;
+            justify-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 40px 32px;
+            background: rgba(201, 168, 76, 0.06);
+            border: 1.5px solid rgba(201, 168, 76, 0.25);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 360px;
+            animation: pulseCard 4s ease-in-out infinite;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: default;
+        }
+        .process-step:hover {
+            background: rgba(201, 168, 76, 0.12);
+            border-color: rgba(201, 168, 76, 0.4);
+            box-shadow: 0 15px 40px rgba(201, 168, 76, 0.2);
+        }
+
+        /* 각 카드에 1초씩 딜레이 추가 */
+        .process-step:nth-child(1) { animation-delay: 0s; }
+        .process-step:nth-child(2) { animation-delay: 1s; }
+        .process-step:nth-child(3) { animation-delay: 2s; }
+        .process-step:nth-child(4) { animation-delay: 3s; }
+
+        @media (max-width: 900px) {
+            .process-grid { grid-template-columns: 1fr; gap: 32px; }
+            .process-step { max-width: 320px; padding: 32px 24px; }
+        }
+        .step-badge {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 24px;
+            border: 3px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.12) 0%, rgba(201, 168, 76, 0.04) 100%);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow:
+                0 0 30px rgba(201, 168, 76, 0.4),
+                inset 0 0 30px rgba(201, 168, 76, 0.15),
+                0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .step-badge::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border: 2px solid rgba(201, 168, 76, 0.3);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .step-badge::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: conic-gradient(from 0deg, transparent 0deg, rgba(201, 168, 76, 0.3) 180deg, transparent 360deg);
+            border-radius: 50%;
+            opacity: 0;
+            animation: rotateBadge 3s linear infinite paused;
+        }
+        @keyframes rotateBadge {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .process-step:hover .step-badge::after {
+            animation-play-state: running;
+        }
+        .step-num {
+            font-family: 'Audiowide', sans-serif;
+            font-size: 48px;
+            font-weight: 400;
+            color: var(--gold);
+            line-height: 1.2;
+            letter-spacing: 2px;
+            text-shadow:
+                0 0 20px rgba(201, 168, 76, 0.6),
+                0 2px 10px rgba(0, 0, 0, 0.4);
+            position: absolute;
+            z-index: 3;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .step-title {
+            font-family: 'Nanum Gothic', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+        }
+        .step-desc {
+            font-family: 'Nanum Gothic', sans-serif;
+            font-size: 14px;
+            color: rgba(237, 232, 223, 0.65);
+            line-height: 1.6;
+            word-break: keep-all;
+        }
+
+        /* ══ SEC-8: FAQ 아코디언 ══ */
+        #sec-8 { display: block; padding: 140px 0; background-color: #060606; }
+        #sec-8 .inner { max-width: 820px; margin: 0 auto; padding: 0 40px; }
+        .sec8-header { text-align: center; margin-bottom: 64px; }
+        .sec8-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+        .sec8-eyebrow span { width: 28px; height: 1px; background: var(--gold); opacity: 0.6; }
+        .sec8-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 900; color: white; }
+        .faq-list { display: flex; flex-direction: column; }
+        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); transition: border-color 0.3s; }
+        .faq-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+        .faq-item.active { border-bottom-color: rgba(201,168,76,0.2); }
+        .faq-q {
+            padding: 26px 0;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: space-between; gap: 20px;
+            user-select: none;
+        }
+        .faq-q-text { display: flex; align-items: baseline; gap: 14px; flex: 1; }
+        .faq-label { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--gold); flex-shrink: 0; font-style: normal; }
+        .faq-q-content { font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 600; color: rgba(237,232,223,0.85); transition: color 0.25s; line-height: 1.5; }
+        .faq-item.active .faq-q-content { color: white; }
+        .faq-arrow {
+            width: 28px; height: 28px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+            color: var(--gold);
+        }
+        .faq-arrow svg { width: 14px; height: 14px; }
+        .faq-item.active .faq-arrow { transform: rotate(180deg); }
+        .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.38s cubic-bezier(0.4,0,0.2,1); }
+        .faq-item.active .faq-a { max-height: 400px; }
+        .faq-a-content { padding: 0 0 28px 32px; font-family: 'Noto Sans KR', sans-serif; font-size: 14px; color: rgba(237,232,223,0.58); line-height: 2; word-break: keep-all; }
+
+        /* ══ SEC-9: 최종 CTA ══ */
+        #sec-9 {
+            position: relative;
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+            padding: 140px 40px;
+        }
+        #sec-9::after {
+            content: '';
+            position: absolute; inset: 0; z-index: 0;
+            background:
+                radial-gradient(ellipse at 50% 60%, rgba(201,168,76,0.07) 0%, transparent 65%),
+                linear-gradient(to bottom, rgba(5,5,5,0.3) 0%, rgba(5,5,5,0.2) 50%, rgba(5,5,5,0.4) 100%);
+        }
+        #sec-9 > *:not(#sec-9::after) { position: relative; z-index: 2; }
+        .cta-content { text-align: center; max-width: 680px; }
+        .cta-gold-line {
+            width: 48px; height: 1px;
+            background: var(--gold); opacity: 0.5;
+            margin: 0 auto 2rem;
+        }
+        .cta-main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 5.5vw, 4rem);
+            font-weight: 900; color: white;
+            line-height: 1.18; margin-bottom: 1.6rem;
+            letter-spacing: -0.02em;
+        }
+        .cta-main-title em { color: var(--gold); font-style: normal; }
+        .cta-subtitle {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 16px; font-weight: 300;
+            color: rgba(237,232,223,0.6);
+            line-height: 2; margin-bottom: 3rem;
+        }
+        .cta-button-wrap { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; }
+        .cta-button {
+            background: var(--gold); color: #060606;
+            padding: 17px 52px; border-radius: 100px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 15px; font-weight: 800;
+            text-decoration: none;
+            display: inline-flex; align-items: center; gap: 10px;
+            transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+            animation: pulse-cta 2.8s ease-in-out infinite;
+        }
+        .cta-button:hover { background: white; color: #000; transform: translateY(-3px); animation-play-state: paused; box-shadow: 0 20px 50px rgba(201,168,76,0.35); }
+        @keyframes pulse-cta { 0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(201,168,76,0.4);} 50%{transform:scale(1.02);box-shadow:0 0 20px 8px rgba(201,168,76,0);} }
+        .cta-subtext { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; color: rgba(201,168,76,0.6); letter-spacing: 0.25em; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <!-- ── Side Navigation ── -->
+    <div id="side-nav">
+        <div class="nav-dot active" data-section="0"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="1"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="2"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="3"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="4"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="5"><div class="dot-circle"></div></div>
+    </div>
+
+    <!-- ── Top Navigation ── -->
+    <nav class="nav-glass">
+        <div class="nav-inner">
+            <a href="#sec-0" style="display:flex;align-items:center;">
+                <img src="https://www.dropbox.com/scl/fi/ipusr5haqh0mti6owj7r4/2.png?rlkey=6gdv1kljge0ezbuwovvyf63uw&st=htc89tep&raw=1" alt="코어탐정사무소" style="height:34px;">
+            </a>
+            <ul class="hidden lg:flex items-center space-x-10">
+                <li><a href="#sec-1" class="nav-link">사무소 철학</a></li>
+                <li><a href="#sec-2" class="nav-link">업무분야</a></li>
+                <li><a href="#sec-5" class="nav-link">증거채택자료</a></li>
+                <li><a href="https://open.kakao.com/o/sZR3WIMh" target="_blank" rel="noopener" class="nav-link nav-cta">상담문의</a></li>
+            </ul>
+            <div class="nav-phone hidden md:block">010.7617.7978</div>
+        </div>
+    </nav>
+
+    <!-- ══════════════════════════════════════
+         SEC-0 : HERO
+    ══════════════════════════════════════ -->
+    <section id="sec-0">
+        <div id="hero-bg-img"></div>
+        <div class="hero-overlay"></div>
+        <div class="relative z-10 text-center px-6 w-full" style="max-width:900px;margin:0 auto;">
+
+            <div id="top-s" class="glare-badge" style="margin:0 auto 2.2rem; width:fit-content;">
+                <div class="badge-pulse"></div>
+                <span class="badge-text">코어 탐정사무소</span>
+            </div>
+
+            <h1 id="hero-title">
+                당신이 마주할<br><span class="gold-point">가장 날카로운 진실</span>
+            </h1>
+
+            <p id="hero-sub">
+                침묵은 답이 아닙니다. 망설임은 상대에게 시간을 줄 뿐입니다.<br>
+                대한민국 0.1% 베테랑의 기술력으로 증거의 가치를 증명합니다.
+            </p>
+
+            <div class="hero-stats" id="hero-stats">
+                <div class="hero-stat">
+                    <div class="h-stat-num">24H</div>
+                    <div class="h-stat-label">비밀 상담</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="h-stat-num">100%</div>
+                    <div class="h-stat-label">보안 유지</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="h-stat-num" id="stat-counter">657</div>
+                    <div class="h-stat-label">누적상담신청</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SEC-1 : 신뢰의 증거
+    ══════════════════════════════════════ -->
+    <section id="sec-1">
+        <div class="inner w-full">
+            <div style="text-align:center;margin-bottom:3.5rem;">
+                <p id="sec1-sub" class="eyebrow" style="color:var(--gold);justify-content:center;">
+                    <span class="eyebrow-line"></span>Verification<span class="eyebrow-line"></span>
+                </p>
+                <h3 id="sec1-title" class="section-title" style="color:var(--text-primary);margin-top:1rem;">
+                    신뢰의 <span style="color:var(--gold);font-style:normal;">증거</span>
+                </h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 text-left">
+
+                <div class="cert-card" style="background-image:url('https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1974');">
+                    <div class="cert-content"><div class="cert-num">01</div>
+                    <h4 class="cert-title">PIA 사설탐정 자격</h4>
+                    <p class="cert-desc">합법과 불법의 경계에서 당신을 보호할 유일한 권한.</p>
+                    <a href="https://open.kakao.com/o/sZR3WIMh" target="_blank" rel="noopener" class="inquiry-btn">전문가 연결 →</a></div>
+                </div>
+
+                <div class="cert-card" style="background-image:url('https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070');">
+                    <div class="cert-content"><div class="cert-num">02</div>
+                    <h4 class="cert-title">디지털 포렌식 1급</h4>
+                    <p class="cert-desc">삭제된 데이터 속에서 숨겨진 핵심 실체를 복원합니다.</p>
+                    <a href="https://open.kakao.com/o/sZR3WIMh" target="_blank" rel="noopener" class="inquiry-btn">전문가 연결 →</a></div>
+                </div>
+
+                <div class="cert-card" style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072');">
+                    <div class="cert-content"><div class="cert-num">03</div>
+                    <h4 class="cert-title">도감청 탐지 마스터</h4>
+                    <p class="cert-desc">보이지 않는 위협으로부터 사생활을 완벽히 보호합니다.</p>
+                    <a href="https://open.kakao.com/o/sZR3WIMh" target="_blank" rel="noopener" class="inquiry-btn">전문가 연결 →</a></div>
+                </div>
+
+                <div class="cert-card" style="background-image:url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070');">
+                    <div class="cert-content"><div class="cert-num">04</div>
+                    <h4 class="cert-title">법률 자문 파트너십</h4>
+                    <p class="cert-desc">수집된 증거는 법정에서 승소의 무기가 됩니다.</p>
+                    <a href="https://open.kakao.com/o/sZR3WIMh" target="_blank" rel="noopener" class="inquiry-btn">전문가 연결 →</a></div>
+                </div>
+
+                <div class="cert-card" style="background-image:url('https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=2070');">
+                    <div class="cert-content"><div class="cert-num">05</div>
+                    <h4 class="cert-title">특수 수사 경력 증명</h4>
+                    <p class="cert-desc">현장에서 다져진 베테랑의 육감으로 진실을 추적합니다.</p>
+                    <a href="https://open.kakao.com/o/sZR3WIMh" target="_blank" rel="noopener" class="inquiry-btn">전문가 연결 →</a></div>
+                </div>
+
+                <div class="cert-card" style="background-image:url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070');">
+                    <div class="cert-content"><div class="cert-num">06</div>
+                    <h4 class="cert-title">국가공인 보안 관리사</h4>
+                    <p class="cert-desc">의뢰 사실은 우리와 함께 무덤까지 비밀로 유지됩니다.</p>
+                    <a href="https://open.kakao.com/o/sZR3WIMh" target="_blank" rel="noopener" class="inquiry-btn">전문가 연결 →</a></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SEC-2 : 기업 위기
+    ══════════════════════════════════════ -->
+    <section id="sec-2" data-bg="#081322">
+        <div style="max-width:1200px;width:100%;padding:0 32px;margin:0 auto;">
+            <div class="section-header">
+                <div class="section-tag-row">
+                    <div class="section-tag-line" style="background:var(--corp-accent);"></div>
+                    <span class="section-tag" style="color:var(--corp-accent);">Business Risk</span>
+                </div>
+                <h2 class="section-h2">기업 위기 <span style="color:var(--corp-accent);">해결사례</span></h2>
+            </div>
+            <div class="case-grid">
+                <div class="case-card">
+                    <div class="case-thumb" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070');">
+                        <div class="case-tag">산업 스파이</div>
+                        <div class="case-result-overlay"><p class="result-type">기술 유출 방지</p><p class="result-status">핵심증거 확보</p></div>
+                    </div>
+                    <div class="case-info">
+                        <h4 class="case-title">반도체 설계 도면 해외 유출 시도 적발</h4>
+                        <p class="case-tags">#영업비밀보호 #기술유출 #포렌식조사 #산업보안 #증거수집</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-thumb" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2011');">
+                        <div class="case-tag">공금 횡령</div>
+                        <div class="case-result-overlay"><p class="result-type">업무상 배임</p><p class="result-status">자금흐름 특정</p></div>
+                    </div>
+                    <div class="case-info">
+                        <h4 class="case-title">CFO급 임원의 법인 자금 사적 유용 추적</h4>
+                        <p class="case-tags">#내부감사 #자금추적 #횡령입증 #배임사건 #특경법위반</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-thumb" style="background-image:url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071');">
+                        <div class="case-tag">경업 금지</div>
+                        <div class="case-result-overlay"><p class="result-type">위장 취업</p><p class="result-status">위반사실 입증</p></div>
+                    </div>
+                    <div class="case-info">
+                        <h4 class="case-title">경쟁사 인력의 위장 취업 및 정보 수집 대응</h4>
+                        <p class="case-tags">#경업금지 #인사리스크 #배후세력특정 #업무방해 #기밀보호</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SEC-3 : 가사 및 자산
+    ══════════════════════════════════════ -->
+    <section id="sec-3" data-bg="#110303">
+        <div style="max-width:1200px;width:100%;padding:0 32px;margin:0 auto;">
+            <div class="section-header">
+                <div class="section-tag-row">
+                    <div class="section-tag-line" style="background:var(--red-accent);"></div>
+                    <span class="section-tag" style="color:var(--red-accent);">Family & Assets</span>
+                </div>
+                <h2 class="section-h2">가사 및 자산 <span style="color:var(--red-accent);">해결사례</span></h2>
+            </div>
+            <div class="case-grid">
+                <div class="case-card">
+                    <div class="case-thumb" style="background-image:url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?q=80&w=2070');">
+                        <div class="case-tag">외도 증거</div>
+                        <div class="case-result-overlay"><p class="result-type">상간자 소송</p><p class="result-status">결정적 증거</p></div>
+                    </div>
+                    <div class="case-info">
+                        <h4 class="case-title">부정행위 현장 채증 및 인적사항 특정</h4>
+                        <p class="case-tags">#외도증거 #상간녀소송 #상간남소송 #현장채증 #증거보전</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-thumb" style="background-image:url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070');">
+                        <div class="case-tag">자산 은닉</div>
+                        <div class="case-result-overlay"><p class="result-type">재산 분할</p><p class="result-status">은닉자산 탐지</p></div>
+                    </div>
+                    <div class="case-info">
+                        <h4 class="case-title">이혼 전 배우자의 차명 계좌 및 부동산 은닉 조사</h4>
+                        <p class="case-tags">#재산분할 #차명계좌 #자산추적 #이혼승소 #정당한권리</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-thumb" style="background-image:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070');">
+                        <div class="case-tag">사기 추적</div>
+                        <div class="case-result-overlay"><p class="result-type">손해 배상</p><p class="result-status">실체적 진실</p></div>
+                    </div>
+                    <div class="case-info">
+                        <h4 class="case-title">지능형 사기 사건 가해자 소재지 및 거주지 파악</h4>
+                        <p class="case-tags">#사기사건 #민사소송 #가해자추적 #채권추심자료 #불법입증</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SEC-4 : VVIP 특수 보안
+    ══════════════════════════════════════ -->
+    <section id="sec-4" data-bg="#050505">
+        <div style="max-width:1200px;width:100%;padding:0 32px;margin:0 auto;">
+            <div class="section-header">
+                <div class="section-tag-row">
+                    <div class="section-tag-line" style="background:var(--gold);"></div>
+                    <span class="section-tag" style="color:var(--gold);">VVIP Special</span>
+                </div>
+                <h2 class="section-h2">VVIP 특수 <span style="color:var(--gold);font-style:normal;">보안업무</span></h2>
+            </div>
+            <div class="case-grid">
+                <div class="case-card">
+                    <div class="case-thumb" style="background-image:url('https://images.unsplash.com/photo-1509248961158-e54f6934749c?q=80&w=2037');">
+                        <div class="case-tag">스토킹 대응</div>
+                        <div class="case-result-overlay"><p class="result-type">신변 보호</p><p class="result-status">위협 즉각차단</p></div>
+                    </div>
+                    <div class="case-info">
+                        <h4 class="case-title">지속적 스토킹 가해자 채증 및 법적조치 연계</h4>
+                        <p class="case-tags">#스토킹처벌법 #접근금지 #증거수집 #신변보안 #안심귀가</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-thumb" style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072');">
+                        <div class="case-tag">도청 탐지</div>
+                        <div class="case-result-overlay"><p class="result-type">기밀 유지</p><p class="result-status">완벽 보안구축</p></div>
+                    </div>
+                    <div class="case-info">
+                        <h4 class="case-title">주요 정재계 인사 집무실 불법 도청기 정밀 적발</h4>
+                        <p class="case-tags">#도감청탐지 #정보보호 #VVIP보안 #비밀회의 #몰카탐지</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-thumb" style="background-image:url('https://images.unsplash.com/photo-1544652478-6653e09f18a2?q=80&w=2070');">
+                        <div class="case-tag">특수 해결</div>
+                        <div class="case-result-overlay"><p class="result-type">기밀 수행</p><p class="result-status">비밀 업무해결</p></div>
+                    </div>
+                    <div class="case-info">
+                        <h4 class="case-title">언론 노출 없는 은밀한 기업 분쟁 중재 및 해결</h4>
+                        <p class="case-tags">#비밀업무 #평판관리 #분쟁중재 #VVIP서비스 #완벽보안</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SEC-5 : 의뢰인 후기
+    ══════════════════════════════════════ -->
+    <section id="sec-5" data-bg="#070707">
+        <div style="max-width:1200px;margin:0 auto;padding:0 32px;margin-bottom:4rem;text-align:center;width:100%;">
+            <p id="sec5-sub" class="eyebrow" style="color:var(--gold);justify-content:center;opacity:0;">
+                <span class="eyebrow-line"></span>Client Voice<span class="eyebrow-line"></span>
+            </p>
+            <h2 id="sec5-title" class="section-title" style="color:var(--text-primary);margin-top:1rem;">
+                실제 의뢰인 <span style="color:var(--gold);font-style:normal;">후기</span>
+            </h2>
+            <p id="sec5-note" style="color:var(--text-muted);margin-top:1rem;font-family:'Inter',sans-serif;font-size:10.5px;letter-spacing:0.28em;text-transform:uppercase;opacity:0;">
+                모든 후기는 의뢰인의 동의 하에 익명 처리되었습니다
+            </p>
+        </div>
+
+        <div class="testi-marquee-wrap w-full">
+            <!-- Row 1 → -->
+            <div class="testi-track row-1">
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">상상도 못 했습니다. 10년을 함께한 임원이 법인 자금을 빼돌리고 있었다는 사실을. 코어탐정의 자금 흐름 분석 덕분에 형사 고소까지 완벽하게 마쳤습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">52세 / 서울 / 제조업 대표</span><span class="testi-badge">기업 위기</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">이혼 조정 중 배우자가 재산을 숨기고 있다는 확신이 있었습니다. 차명 부동산과 계좌 자료를 찾아낸 덕분에 정당한 몫을 온전히 받을 수 있었습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">44세 / 경기 / 의사</span><span class="testi-badge">가사·자산</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">회의 내용이 반드시 새고 있다는 직감이 있었습니다. 의뢰 결과 집무실에서 실제 도청기가 발견되었고, 즉각 법적 조치까지 완벽하게 마무리 지었습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">61세 / 서울 / 그룹 회장</span><span class="testi-badge">VVIP 보안</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">6년간의 의심을 3일 만에 증거로 만들어냈습니다. 그 자료 하나가 결정적으로 작용해 위자료 소송에서 완전히 이겼습니다. 혼자였다면 불가능했을 일입니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">38세 / 부산 / 직장인</span><span class="testi-badge">가사·자산</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">핵심 개발자가 소스코드를 들고 경쟁사로 이직했습니다. 포렌식 보고서를 법원에 제출한 결과 손해배상 청구 소송에서 전액 승소했습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">46세 / 판교 / 스타트업 대표</span><span class="testi-badge">기업 위기</span></div></div>
+                <!-- loop -->
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">상상도 못 했습니다. 10년을 함께한 임원이 법인 자금을 빼돌리고 있었다는 사실을. 코어탐정의 자금 흐름 분석 덕분에 형사 고소까지 완벽하게 마쳤습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">52세 / 서울 / 제조업 대표</span><span class="testi-badge">기업 위기</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">이혼 조정 중 배우자가 재산을 숨기고 있다는 확신이 있었습니다. 차명 부동산과 계좌 자료를 찾아낸 덕분에 정당한 몫을 온전히 받을 수 있었습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">44세 / 경기 / 의사</span><span class="testi-badge">가사·자산</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">회의 내용이 반드시 새고 있다는 직감이 있었습니다. 의뢰 결과 집무실에서 실제 도청기가 발견되었고, 즉각 법적 조치까지 완벽하게 마무리 지었습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">61세 / 서울 / 그룹 회장</span><span class="testi-badge">VVIP 보안</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">6년간의 의심을 3일 만에 증거로 만들어냈습니다. 그 자료 하나가 결정적으로 작용해 위자료 소송에서 완전히 이겼습니다. 혼자였다면 불가능했을 일입니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">38세 / 부산 / 직장인</span><span class="testi-badge">가사·자산</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">핵심 개발자가 소스코드를 들고 경쟁사로 이직했습니다. 포렌식 보고서를 법원에 제출한 결과 손해배상 청구 소송에서 전액 승소했습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">46세 / 판교 / 스타트업 대표</span><span class="testi-badge">기업 위기</span></div></div>
+            </div>
+
+            <!-- Row 2 ← -->
+            <div class="testi-track row-2">
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">혼자 감당하기엔 너무 무서운 상황이었습니다. 스토킹 가해자를 채증한 뒤 접근금지 가처분을 받아낸 그 날이 제 인생에서 가장 안도한 날이었습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">29세 / 서울 / 직장인</span><span class="testi-badge">VVIP 보안</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">퇴사 직원이 고객 DB 전체를 가져갔습니다. 코어탐정의 디지털 포렌식 보고서 하나로 검찰 기소까지 이어졌고, 회사를 지킬 수 있었습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">48세 / 서울 / IT기업 이사</span><span class="testi-badge">기업 위기</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">2년 넘게 사기를 당한 줄도 몰랐습니다. 가해자의 실거주지와 차량까지 특정해준 덕분에 민사 소송에서 채권을 집행할 수 있었습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">55세 / 대전 / 자영업</span><span class="testi-badge">가사·자산</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">투자자 미팅 내용이 사전에 유출된다는 의심이 있었습니다. 내부 제보자를 특정하고 법적 고지까지 완결 지어줬습니다. 회사 기밀이 다시 안전해졌습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">41세 / 서울 / 벤처기업 CFO</span><span class="testi-badge">기업 위기</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">숙박 시설 이용 중 이상한 느낌이 들었습니다. 의뢰 결과 실제 카메라가 발견되었고 법적 대응까지 완벽하게 지원받았습니다. 믿을 수 있는 곳이었습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">34세 / 인천 / 공연 기획자</span><span class="testi-badge">VVIP 보안</span></div></div>
+                <!-- loop -->
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">혼자 감당하기엔 너무 무서운 상황이었습니다. 스토킹 가해자를 채증한 뒤 접근금지 가처분을 받아낸 그 날이 제 인생에서 가장 안도한 날이었습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">29세 / 서울 / 직장인</span><span class="testi-badge">VVIP 보안</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">퇴사 직원이 고객 DB 전체를 가져갔습니다. 코어탐정의 디지털 포렌식 보고서 하나로 검찰 기소까지 이어졌고, 회사를 지킬 수 있었습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">48세 / 서울 / IT기업 이사</span><span class="testi-badge">기업 위기</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">2년 넘게 사기를 당한 줄도 몰랐습니다. 가해자의 실거주지와 차량까지 특정해준 덕분에 민사 소송에서 채권을 집행할 수 있었습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">55세 / 대전 / 자영업</span><span class="testi-badge">가사·자산</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">투자자 미팅 내용이 사전에 유출된다는 의심이 있었습니다. 내부 제보자를 특정하고 법적 고지까지 완결 지어줬습니다. 회사 기밀이 다시 안전해졌습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">41세 / 서울 / 벤처기업 CFO</span><span class="testi-badge">기업 위기</span></div></div>
+                <div class="testi-card"><span class="testi-quote">"</span><p class="testi-text">숙박 시설 이용 중 이상한 느낌이 들었습니다. 의뢰 결과 실제 카메라가 발견되었고 법적 대응까지 완벽하게 지원받았습니다. 믿을 수 있는 곳이었습니다.</p><div class="testi-divider"></div><div class="testi-meta"><span class="testi-client">34세 / 인천 / 공연 기획자</span><span class="testi-badge">VVIP 보안</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+        <button class="lightbox-close" onclick="closeLightbox()" aria-label="닫기">×</button>
+        <img src="" id="lightbox-img" alt="자격증 원본">
+    </div>
+
+    <!-- ══════════════════════════════════════
+         SEC-6 : 검증 트러스트 갤러리
+    ══════════════════════════════════════ -->
+    <section id="sec-6">
+        <div class="inner">
+            <div class="sec6-header">
+                <div class="sec6-eyebrow"><span></span>Verified Credentials<span></span></div>
+                <h2 class="sec6-title">검증된 <em>자격증</em></h2>
+            </div>
+            <div class="prove-carousel-wrap">
+                <div class="prove-carousel-track">
+                    <div class="prove-card" onclick="openLightbox('PROVE/1.png')">
+                        <div class="prove-card-content">
+                            <div class="prove-card-number">01</div>
+                            <h3 class="prove-card-title">PIA 탐정사</h3>
+                            <p class="prove-card-org">한국특수직능교육재단</p>
+                            <div class="prove-card-action">자격증 보기</div>
+                        </div>
+                    </div>
+                    <div class="prove-card" onclick="openLightbox('PROVE/2.png')">
+                        <div class="prove-card-content">
+                            <div class="prove-card-number">02</div>
+                            <h3 class="prove-card-title">탐정사 자격</h3>
+                            <p class="prove-card-org">대한공인탐정연구협회</p>
+                            <div class="prove-card-action">자격증 보기</div>
+                        </div>
+                    </div>
+                    <div class="prove-card" onclick="openLightbox('PROVE/3.png')">
+                        <div class="prove-card-content">
+                            <div class="prove-card-number">03</div>
+                            <h3 class="prove-card-title">신용정보업 종사원증</h3>
+                            <p class="prove-card-org">채권추심, 신용조사</p>
+                            <div class="prove-card-action">자격증 보기</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SEC-7 : 의뢰 절차
+    ══════════════════════════════════════ -->
+    <section id="sec-7">
+        <div class="inner">
+            <div class="sec7-header">
+                <div class="sec7-eyebrow"><span></span>How It Works<span></span></div>
+                <h2 class="sec7-title">의뢰 절차</h2>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-badge"><div class="step-num">1</div></div>
+                    <h3 class="step-title">비밀 상담</h3>
+                    <p class="step-desc">무료 1:1 상담으로 상황을 정확히 파악합니다. 모든 내용은 엄격하게 보안 관리됩니다.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-badge"><div class="step-num">2</div></div>
+                    <h3 class="step-title">계약 체결</h3>
+                    <p class="step-desc">법률 자문과 함께 계약서를 작성합니다. 수사 범위와 예상 기간을 명확히 합니다.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-badge"><div class="step-num">3</div></div>
+                    <h3 class="step-title">현장 수사</h3>
+                    <p class="step-desc">디지털 포렌식, 현장 조사 등 전문 기술을 투입하여 증거를 수집합니다.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-badge"><div class="step-num">4</div></div>
+                    <h3 class="step-title">보고서 제출</h3>
+                    <p class="step-desc">법정에 채택되는 증거 보고서를 완성합니다. 필요시 법적 절차를 지원합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SEC-8 : FAQ
+    ══════════════════════════════════════ -->
+    <section id="sec-8">
+        <div class="inner">
+            <div class="sec8-header">
+                <div class="sec8-eyebrow"><span></span>FAQ<span></span></div>
+                <h2 class="sec8-title">자주 묻는 질문</h2>
+            </div>
+            <div class="faq-list" id="faq-list">
+                <div class="faq-item">
+                    <div class="faq-q">
+                        <div class="faq-q-text">
+                            <span class="faq-label">Q.</span>
+                            <span class="faq-q-content">자격증이 정말 있나요?</span>
+                        </div>
+                        <div class="faq-arrow">▼</div>
+                    </div>
+                    <div class="faq-a">
+                        <div class="faq-a-content">네, PROVE 섹션에서 보실 수 있듯이 5개의 공식 자격증을 보유하고 있습니다. PIA 사설탐정 자격부터 국가공인 보안 관리사까지 모두 검증 가능한 실적입니다.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">
+                        <div class="faq-q-text">
+                            <span class="faq-label">Q.</span>
+                            <span class="faq-q-content">수집한 증거가 법정에 인정되나요?</span>
+                        </div>
+                        <div class="faq-arrow">▼</div>
+                    </div>
+                    <div class="faq-a">
+                        <div class="faq-a-content">네, 디지털 포렌식 1급 자격으로 수집된 증거는 100% 법적 효력을 인정받습니다. 법률 자문과 함께 법정 제출 가능한 형태로 보고서를 작성합니다.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">
+                        <div class="faq-q-text">
+                            <span class="faq-label">Q.</span>
+                            <span class="faq-q-content">정말 비밀이 유지되나요?</span>
+                        </div>
+                        <div class="faq-arrow">▼</div>
+                    </div>
+                    <div class="faq-a">
+                        <div class="faq-a-content">절대적으로 보장합니다. 국가공인 보안 관리사 자격을 보유하고 있으며, 모든 의뢰 내용과 수사 과정은 법적 비밀유지 의무 대상입니다.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">
+                        <div class="faq-q-text">
+                            <span class="faq-label">Q.</span>
+                            <span class="faq-q-content">상담 비용은 정말 무료인가요?</span>
+                        </div>
+                        <div class="faq-arrow">▼</div>
+                    </div>
+                    <div class="faq-a">
+                        <div class="faq-a-content">네, 초기 상담은 완전 무료입니다. 상담을 통해 사건 유형과 예상 기간, 비용을 투명하게 설명한 후 의뢰 여부를 결정하실 수 있습니다.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">
+                        <div class="faq-q-text">
+                            <span class="faq-label">Q.</span>
+                            <span class="faq-q-content">경력은 어떻게 되나요?</span>
+                        </div>
+                        <div class="faq-arrow">▼</div>
+                    </div>
+                    <div class="faq-a">
+                        <div class="faq-a-content">15년 이상의 특수 수사 현장 경력을 보유하고 있습니다. 기업 위기부터 가사/자산 사건, VVIP 보안까지 다양한 분야에서 증명된 실적이 있습니다.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">
+                        <div class="faq-q-text">
+                            <span class="faq-label">Q.</span>
+                            <span class="faq-q-content">얼마나 빨리 결과를 얻을 수 있나요?</span>
+                        </div>
+                        <div class="faq-arrow">▼</div>
+                    </div>
+                    <div class="faq-a">
+                        <div class="faq-a-content">사건의 특성에 따라 다르지만, 평균적으로 3~7일 내에 핵심 증거를 확보하고 있습니다. 긴급 사건의 경우 24시간 내 초기 조사 결과를 제공합니다.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SEC-9 : 최종 CTA
+    ══════════════════════════════════════ -->
+    <section id="sec-9">
+        <div class="cta-content">
+            <div class="cta-gold-line"></div>
+            <h2 class="cta-main-title">
+                시간은<br>당신을 기다려 주지<br>않습니다.
+            </h2>
+            <p class="cta-subtitle">
+                지금바로 비밀상담을 신청하세요
+            </p>
+            <div class="cta-button-wrap">
+                <a href="https://open.kakao.com/o/sZR3WIMh" target="_blank" rel="noopener" class="cta-button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 4.925 0 11c0 3.714 1.954 7.001 5 9.065V24l4.2-2.7c.924.129 1.872.199 2.8.199 6.627 0 12-4.925 12-11S18.627 0 12 0z"/></svg>
+                    지금상담하기
+                </a>
+                <span class="cta-subtext">실시간 답변 중</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ BOTTOM BAR ══ -->
+    <div id="sticky-bottom-bar">
+        <div class="bar-info">
+            <div class="secure-status">
+                <div class="pulse-dot"></div>
+                <span class="enc-label">Encrypted</span>
+            </div>
+            <a href="tel:01076177978" class="phone-link">010.7617.7978</a>
+        </div>
+        <div class="cta-group">
+            <a href="https://blog.naver.com/tkko7617" id="blog-link" target="_blank" rel="noopener" class="blog-btn">블로그</a>
+            <a href="https://open.kakao.com/o/sZR3WIMh" target="_blank" rel="noopener" class="bar-btn">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 4.925 0 11c0 3.714 1.954 7.001 5 9.065V24l4.2-2.7c.924.129 1.872.199 2.8.199 6.627 0 12-4.925 12-11S18.627 0 12 0z"/></svg>
+                24h 비밀상담
+            </a>
+        </div>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        /* ── Lightbox (전역) ── */
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        /* ── 텍스트 분해 ── */
+        function splitTextSafe(el) {
+            let html = '';
+            Array.from(el.childNodes).forEach(node => {
+                if (node.nodeType === 3) {
+                    html += node.textContent.split('').map(c =>
+                        c === ' ' ? ' ' : `<span class="char">${c}</span>`
+                    ).join('');
+                } else if (node.tagName === 'BR') {
+                    html += '<br>';
+                } else {
+                    const inner = node.textContent.split('').map(c =>
+                        c === ' ' ? ' ' : `<span class="char">${c}</span>`
+                    ).join('');
+                    html += `<span class="${node.className}">${inner}</span>`;
+                }
+            });
+            el.innerHTML = html;
+            el.style.opacity = '1';
+        }
+
+        /* ── 블로그 링크 디바이스 분기 ── */
+        function updateBlogLink() {
+            const el = document.getElementById('blog-link');
+            const mobile = window.innerWidth <= 768 || /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            el.href = mobile ? 'https://m.blog.naver.com/tkko7617' : 'https://blog.naver.com/tkko7617';
+        }
+        let _rt;
+        window.addEventListener('resize', () => { clearTimeout(_rt); _rt = setTimeout(updateBlogLink, 200); });
+
+        /* ── DOMContentLoaded ── */
+        window.addEventListener('DOMContentLoaded', () => {
+            updateBlogLink();
+            splitTextSafe(document.getElementById('hero-title'));
+
+            /* Hero BG Ken Burns */
+            gsap.to('#hero-bg-img', { scale: 1.1, duration: 13, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+
+            /* Hero reveal timeline - will be triggered after intro video */
+            window.heroTimeline = gsap.timeline({ paused: true })
+                .to('#top-s',      { opacity: 1, y: -10, duration: 0.9, ease: 'power2.out' })
+                .to('.char',       { opacity: 1, y: 0, rotateX: 0, duration: 0.5, stagger: 0.042, ease: 'back.out(1.7)' }, '-=0.4')
+                .to('#hero-sub',   { opacity: 1, y: -8, duration: 1.0, ease: 'power2.out' }, '-=0.2')
+                .to('#hero-stats', { opacity: 1, y: -8, duration: 0.9, ease: 'power2.out' }, '-=0.5');
+
+            /* SEC-1 animations */
+            gsap.timeline({ scrollTrigger: { trigger: '#sec-1', start: 'top 45%', toggleActions: 'restart none none none' } })
+                .to('#sec1-sub',   { opacity: 1, y: -8, duration: 0.8, ease: 'power2.out' })
+                .to('#sec1-title', { opacity: 1, y: -8, duration: 0.8, ease: 'power2.out' }, '-=0.4')
+                .to('.cert-card',  {
+                    opacity: 1, y: 0, duration: 0.9,
+                    stagger: 0.11, ease: 'power3.out',
+                    onComplete: () => document.querySelectorAll('.cert-card').forEach(el => el.classList.add('is-visible'))
+                }, '-=0.5');
+
+            /* SEC-1 body bg */
+            ScrollTrigger.create({
+                trigger: '#sec-1', start: 'top center',
+                onEnter:     () => gsap.to('body', { backgroundColor: '#0C0C0C', duration: 0.95 }),
+                onEnterBack: () => gsap.to('body', { backgroundColor: '#0C0C0C', duration: 0.95 })
+            });
+
+            /* SEC-2 ~ SEC-5 */
+            ['#sec-2', '#sec-3', '#sec-4', '#sec-5'].forEach(sel => {
+                const section = document.querySelector(sel);
+                if (!section) return;
+
+                ScrollTrigger.create({
+                    trigger: section, start: 'top center',
+                    onEnter:     () => gsap.to('body', { backgroundColor: section.dataset.bg, duration: 0.95 }),
+                    onEnterBack: () => gsap.to('body', { backgroundColor: section.dataset.bg, duration: 0.95 })
+                });
+
+                const cards = section.querySelectorAll('.case-card');
+                if (cards.length) {
+                    gsap.to(cards, {
+                        opacity: 1, y: 0, duration: 0.9, stagger: 0.17, ease: 'power3.out',
+                        scrollTrigger: { trigger: section, start: 'top 50%' },
+                        onComplete: () => cards.forEach(c => c.classList.add('is-visible'))
+                    });
+                }
+            });
+
+            /* SEC-5 header */
+            gsap.timeline({ scrollTrigger: { trigger: '#sec-5', start: 'top 50%', toggleActions: 'restart none none none' } })
+                .to('#sec5-sub',   { opacity: 1, y: -8, duration: 0.75, ease: 'power2.out' })
+                .to('#sec5-title', { opacity: 1, y: -8, duration: 0.8,  ease: 'power2.out' }, '-=0.35')
+                .to('#sec5-note',  { opacity: 1, y: -8, duration: 0.75, ease: 'power2.out' }, '-=0.35');
+
+            /* ── SEC-6: 자격증 갤러리 ── */
+            ScrollTrigger.create({ trigger: '#sec-6', start: 'top center', onEnter: () => gsap.to('body', { backgroundColor: '#000000', duration: 0.95 }), onEnterBack: () => gsap.to('body', { backgroundColor: '#000000', duration: 0.95 }) });
+            gsap.timeline({ scrollTrigger: { trigger: '#sec-6', start: 'top 55%' } })
+                .from('.sec6-eyebrow', { opacity: 0, y: 22, duration: 0.85, ease: 'power3.out' })
+                .from('.sec6-title',   { opacity: 0, y: 38, duration: 1.0,  ease: 'expo.out' }, '-=0.5');
+            gsap.from('.prove-card', {
+                y: 52, scale: 0.94,
+                duration: 0.9, stagger: { amount: 0.55, ease: 'power1.inOut' }, ease: 'expo.out',
+                scrollTrigger: { trigger: '#sec-6', start: 'top 55%' }
+            });
+
+            /* ── SEC-7: 의뢰 절차 ── */
+            ScrollTrigger.create({ trigger: '#sec-7', start: 'top center', onEnter: () => gsap.to('body', { backgroundColor: '#080E1C', duration: 0.95 }), onEnterBack: () => gsap.to('body', { backgroundColor: '#080E1C', duration: 0.95 }) });
+            gsap.timeline({ scrollTrigger: { trigger: '#sec-7', start: 'top 55%' } })
+                .from('.sec7-eyebrow', { opacity: 0, y: 22, duration: 0.75, ease: 'power3.out' })
+                .from('.sec7-title',   { opacity: 0, y: 38, duration: 0.9,  ease: 'expo.out' }, '-=0.45')
+                .from('.process-step', { y: 40, duration: 0.8, stagger: 0.08, ease: 'power3.out' }, '-=0.6');
+
+            /* ── SEC-8: FAQ ── */
+            ScrollTrigger.create({ trigger: '#sec-8', start: 'top center', onEnter: () => gsap.to('body', { backgroundColor: '#060606', duration: 0.95 }), onEnterBack: () => gsap.to('body', { backgroundColor: '#060606', duration: 0.95 }) });
+            gsap.timeline({ scrollTrigger: { trigger: '#sec-8', start: 'top 55%' } })
+                .from('.sec8-eyebrow', { opacity: 0, y: 22, duration: 0.85, ease: 'power3.out' })
+                .from('.sec8-title',   { opacity: 0, y: 38, duration: 1.0,  ease: 'expo.out' }, '-=0.5');
+            gsap.from('.faq-item', {
+                opacity: 0, y: 30,
+                duration: 0.85, stagger: { amount: 0.52, ease: 'power1.inOut' }, ease: 'power3.out',
+                scrollTrigger: { trigger: '#sec-8', start: 'top 55%' }
+            });
+
+            /* ── SEC-9: 최종 CTA ── */
+            gsap.timeline({ scrollTrigger: { trigger: '#sec-9', start: 'top 58%' } })
+                .from('.cta-gold-line',   { scaleX: 0, opacity: 0, duration: 1.0, ease: 'expo.out', transformOrigin: 'center center' })
+                .from('.cta-main-title',  { opacity: 0, y: 44, duration: 1.05, ease: 'expo.out' }, '-=0.5')
+                .from('.cta-subtitle',    { opacity: 0, y: 32, duration: 0.95, ease: 'power3.out' }, '-=0.6')
+                .from('.cta-button-wrap', { opacity: 0, y: 24, duration: 0.9,  ease: 'power3.out' }, '-=0.55');
+
+            /* ── Lightbox 이벤트 ── */
+            document.getElementById('lightbox').addEventListener('click', function(e) {
+                if (e.target === this) closeLightbox();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeLightbox();
+            });
+
+            /* FAQ 아코디언 */
+            document.querySelectorAll('.faq-q').forEach(q => {
+                q.addEventListener('click', () => {
+                    const item = q.closest('.faq-item');
+                    item.classList.toggle('active');
+                });
+            });
+
+            /* Side navigation */
+            gsap.utils.toArray('.nav-dot').forEach((dot, i) => {
+                dot.addEventListener('click', () => {
+                    document.getElementById(`sec-${i}`)?.scrollIntoView({ behavior: 'smooth' });
+                });
+                ScrollTrigger.create({
+                    trigger: `#sec-${i}`,
+                    start: 'top center',
+                    end: 'bottom center',
+                    onToggle: self => {
+                        if (!self.isActive) return;
+                        document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('active'));
+                        dot.classList.add('active');
+                    }
+                });
+            });
+
+            /* Counter animation for hero stat */
+            let counter = 657;
+            const statCounterEl = document.getElementById('stat-counter');
+            const incrementPattern = [3, 4, 1]; // +3, +4, +1 반복
+            let patternIndex = 0;
+
+            setInterval(() => {
+                counter += incrementPattern[patternIndex];
+                patternIndex = (patternIndex + 1) % incrementPattern.length;
+                statCounterEl.textContent = counter.toLocaleString('en-US');
+            }, 4000);
+
+            /* ── Intro Video ── */
+            const introVideo = document.getElementById('intro-video');
+            const introOverlay = document.getElementById('intro-video-overlay');
+
+            if (introVideo) {
+                // 브라우저 너비에 따라 다른 비디오 로드
+                const isMobile = window.innerWidth < 768;
+                const videoSrc = isMobile ? 'SAUCE/MOBILE CORE.MP4' : 'SAUCE/CORE.MP4';
+
+                // 비디오 소스 설정
+                const sourceElement = introVideo.querySelector('source');
+                if (sourceElement) {
+                    sourceElement.src = videoSrc;
+                } else {
+                    // source 요소가 없으면 직접 src 설정
+                    introVideo.src = videoSrc;
+                }
+
+                // 비디오 재로드
+                introVideo.load();
+
+                console.log('Loading video:', videoSrc, 'isMobile:', isMobile);
+                // 비디오 재생 시작 감지
+                introVideo.addEventListener('play', function() {
+                    console.log('Video playing, duration:', introVideo.duration);
+                });
+
+                // 비디오 재생 완료 감지
+                introVideo.addEventListener('ended', function() {
+                    console.log('Video ended, fading out');
+                    hideIntroVideo();
+                });
+
+                // 비디오가 로드되면 duration을 확인해서 자동으로 숨기기
+                introVideo.addEventListener('loadedmetadata', function() {
+                    const duration = introVideo.duration;
+                    if (duration > 0) {
+                        setTimeout(() => {
+                            hideIntroVideo();
+                        }, (duration + 0.5) * 1000); // duration + 0.5초
+                    }
+                });
+            }
+
+            function hideIntroVideo() {
+                if (introOverlay) {
+                    introOverlay.style.animation = 'fadeOutVideo 0.8s ease-out forwards';
+                    setTimeout(() => {
+                        introOverlay.style.display = 'none';
+                        introOverlay.style.pointerEvents = 'none';
+
+                        /* SEC-0 애니메이션 시작 (비디오 종료 + 0.5초 후) */
+                        if (window.heroTimeline) {
+                            window.heroTimeline.play();
+                        }
+                    }, 800);
+                }
+            }
+        });
+    </script>
+
+    <!-- Intro Video Overlay -->
+    <div id="intro-video-overlay">
+        <video id="intro-video" autoplay muted playsinline>
+            <source src="SAUCE/CORE.MP4" type="video/mp4">
+        </video>
+    </div>
+</body>
+</html>
