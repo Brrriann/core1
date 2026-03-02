@@ -1820,6 +1820,9 @@
             const introVideo = document.getElementById('intro-video');
             const introOverlay = document.getElementById('intro-video-overlay');
 
+            // 인트로 영상 재생 중 스크롤 비활성화
+            document.body.style.overflow = 'hidden';
+
             if (introVideo) {
                 // 브라우저 너비에 따라 다른 비디오 로드
                 const isMobile = window.innerWidth < 768;
@@ -1861,6 +1864,9 @@
             }
 
             function hideIntroVideo() {
+                // 스크롤 다시 활성화
+                document.body.style.overflow = 'auto';
+
                 if (introOverlay) {
                     introOverlay.style.animation = 'fadeOutVideo 0.8s ease-out forwards';
                     setTimeout(() => {
