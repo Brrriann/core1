@@ -769,29 +769,13 @@
             width: 100%;
             margin-top: 48px;
             margin-bottom: 48px;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-behavior: smooth;
-        }
-        .prove-carousel-wrap::-webkit-scrollbar {
-            height: 6px;
-        }
-        .prove-carousel-wrap::-webkit-scrollbar-track {
-            background: rgba(201, 168, 76, 0.1);
-            border-radius: 10px;
-        }
-        .prove-carousel-wrap::-webkit-scrollbar-thumb {
-            background: var(--gold);
-            border-radius: 10px;
         }
         .prove-carousel-track {
-            display: flex;
-            flex-wrap: nowrap;
+            display: grid;
+            grid-template-columns: repeat(3, 400px);
             gap: 24px;
-            width: fit-content;
-            margin: 0 auto;
             justify-content: center;
-            padding: 0;
+            width: 100%;
         }
         .prove-card {
             width: 400px;
@@ -865,19 +849,11 @@
         @media (max-width: 768px) {
             #sec-6 { padding: 80px 0 120px 0; }
             #sec-6 .inner { padding: 0 20px; }
-            .prove-carousel-wrap {
-                margin-top: 32px;
-                margin-bottom: 32px;
-                overflow-x: auto;
-                overflow-y: hidden;
-                scroll-behavior: smooth;
-            }
+            .prove-carousel-wrap { margin-top: 32px; margin-bottom: 32px; }
             .prove-carousel-track {
-                display: flex;
-                flex-wrap: nowrap;
+                grid-template-columns: 1fr;
                 gap: 16px;
-                width: fit-content;
-                padding: 0;
+                width: 100%;
             }
             .prove-card {
                 width: 100%;
@@ -1704,19 +1680,6 @@
         window.addEventListener('DOMContentLoaded', () => {
             updateBlogLink();
             splitTextSafe(document.getElementById('hero-title'));
-
-            /* 자격증 카드 무한 스크롤 효과 - 3개 카드 반복 */
-            const proveTrack = document.querySelector('.prove-carousel-track');
-            if (proveTrack) {
-                const proveCards = Array.from(proveTrack.querySelectorAll('.prove-card'));
-                if (proveCards.length > 0) {
-                    // 원본 카드 3개 복제 (반복)
-                    proveCards.forEach(card => {
-                        const clone = card.cloneNode(true);
-                        proveTrack.appendChild(clone);
-                    });
-                }
-            }
 
             /* Hero BG Ken Burns */
             gsap.to('#hero-bg-img', { scale: 1.1, duration: 13, repeat: -1, yoyo: true, ease: 'sine.inOut' });
