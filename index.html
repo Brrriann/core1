@@ -851,15 +851,22 @@
         #sec-a svg { animation: float 3s ease-in-out infinite; }
         #sec-a svg:nth-child(odd) { animation-delay: 0s; }
         #sec-a svg:nth-child(even) { animation-delay: 1.5s; }
+        /* SEC-A 애니메이션 초기 상태 (gsap.to 패턴용) */
+        #sec-a-items { opacity: 0; transform: translateY(20px); }
+        #sec-a-cta   { opacity: 0; transform: translateY(16px); }
 
         /* ── SEC-B 스타일 ── */
         #sec-b .eyebrow { display: flex; align-items: center; justify-content: center; gap: 1rem; }
         #sec-b .eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
+        /* SEC-B 애니메이션 초기 상태 */
+        #sec-b-cards > div { opacity: 0; transform: translateY(24px) scale(0.95); transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; }
         #sec-b-cards > div:hover { background: rgba(201,168,76,0.15); box-shadow: 0 8px 24px rgba(201,168,76,0.2); transform: translateY(-4px); }
 
         /* ── SEC-D 스타일 ── */
         #sec-d .eyebrow { display: flex; align-items: center; justify-content: center; gap: 1rem; }
         #sec-d .eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
+        /* SEC-D 애니메이션 초기 상태 */
+        #sec-d-cards > div { opacity: 0; transform: translateY(28px) scale(0.95); transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; }
         #sec-d-cards > div:hover { background: rgba(201,168,76,0.12); box-shadow: 0 12px 36px rgba(201,168,76,0.25); transform: translateY(-6px); }
 
         /* ── SEC-C (Footer SEO) 스타일 ── */
@@ -2012,38 +2019,20 @@
             });
 
             /* ── SEC-A: 이런 분들이 연락하셨습니다 ── */
-            gsap.from('#sec-a-title', {
-                opacity: 0, y: 38, duration: 1.0, ease: 'expo.out',
-                scrollTrigger: { trigger: '#sec-a', start: 'top 55%' }
-            });
-            gsap.from('#sec-a-items', {
-                opacity: 0, y: 30, duration: 0.95, ease: 'power3.out',
-                scrollTrigger: { trigger: '#sec-a', start: 'top 55%' }
-            }, '-=0.4');
-            gsap.from('#sec-a-cta', {
-                opacity: 0, y: 24, duration: 0.85, ease: 'power3.out',
-                scrollTrigger: { trigger: '#sec-a', start: 'top 55%' }
-            }, '-=0.3');
+            gsap.timeline({ scrollTrigger: { trigger: '#sec-a', start: 'top 55%' } })
+                .to('#sec-a-title', { opacity: 1, y: -8,  duration: 1.0,  ease: 'expo.out' })
+                .to('#sec-a-items', { opacity: 1, y: 0,   duration: 0.95, ease: 'power3.out' }, '-=0.5')
+                .to('#sec-a-cta',   { opacity: 1, y: 0,   duration: 0.85, ease: 'power3.out' }, '-=0.4');
 
             /* ── SEC-B: 상담 전 걱정들 ── */
-            gsap.from('#sec-b-title', {
-                opacity: 0, y: 38, duration: 1.0, ease: 'expo.out',
-                scrollTrigger: { trigger: '#sec-b', start: 'top 55%' }
-            });
-            gsap.from('#sec-b-cards > div', {
-                opacity: 0, y: 32, scale: 0.92, duration: 0.8, stagger: { amount: 0.4, ease: 'power1.inOut' }, ease: 'back.out(1.5)',
-                scrollTrigger: { trigger: '#sec-b', start: 'top 55%' }
-            }, '-=0.3');
+            gsap.timeline({ scrollTrigger: { trigger: '#sec-b', start: 'top 55%' } })
+                .to('#sec-b-title',       { opacity: 1, y: -8, duration: 1.0, ease: 'expo.out' })
+                .to('#sec-b-cards > div', { opacity: 1, y: 0,  scale: 1, duration: 0.8, stagger: 0.12, ease: 'back.out(1.5)' }, '-=0.4');
 
             /* ── SEC-D: 코어탐정을 선택하는 이유 ── */
-            gsap.from('#sec-d-title', {
-                opacity: 0, y: 38, duration: 1.0, ease: 'expo.out',
-                scrollTrigger: { trigger: '#sec-d', start: 'top 55%' }
-            });
-            gsap.from('#sec-d-cards > div', {
-                opacity: 0, y: 36, scale: 0.9, duration: 0.85, stagger: { amount: 0.45, ease: 'power1.inOut' }, ease: 'back.out(1.3)',
-                scrollTrigger: { trigger: '#sec-d', start: 'top 55%' }
-            }, '-=0.4');
+            gsap.timeline({ scrollTrigger: { trigger: '#sec-d', start: 'top 55%' } })
+                .to('#sec-d-title',       { opacity: 1, y: -8, duration: 1.0,  ease: 'expo.out' })
+                .to('#sec-d-cards > div', { opacity: 1, y: 0,  scale: 1, duration: 0.85, stagger: 0.15, ease: 'back.out(1.3)' }, '-=0.4');
 
             /* ── SEC-9: 최종 CTA ── */
             gsap.timeline({ scrollTrigger: { trigger: '#sec-9', start: 'top 58%' } })
