@@ -1128,6 +1128,95 @@
         .cta-button:hover { background: white; color: #000; transform: translateY(-3px); animation-play-state: paused; box-shadow: 0 20px 50px rgba(201,168,76,0.35); }
         @keyframes pulse-cta { 0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(201,168,76,0.4);} 50%{transform:scale(1.02);box-shadow:0 0 20px 8px rgba(201,168,76,0);} }
         .cta-subtext { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; color: rgba(201,168,76,0.6); letter-spacing: 0.25em; text-transform: uppercase; }
+
+        /* ════════════════════════════════════════
+           Mobile Responsive Design (Max 768px)
+        ════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            /* SEC-A 모바일 반응형 */
+            #sec-a { padding: 80px 0 !important; }
+            #sec-a > div { padding: 0 20px !important; }
+            #sec-a .eyebrow { margin-bottom: 1rem !important; }
+            #sec-a-title { font-size: 26px !important; line-height: 1.35 !important; }
+            #sec-a-items { gap: 1.2rem !important; max-width: 100% !important; }
+            #sec-a-items > div { gap: 0.8rem !important; }
+            #sec-a-items svg { width: 20px !important; height: 20px !important; margin-top: 1px !important; }
+            #sec-a-items p { font-size: 13px !important; line-height: 1.6 !important; }
+            #sec-a-cta { margin-top: 2.5rem !important; }
+            #sec-a-cta p:first-child { font-size: 16px !important; margin-bottom: 1rem !important; }
+            #sec-a-cta p:last-child { font-size: 12px !important; }
+
+            /* SEC-B 모바일 반응형 */
+            #sec-b { padding: 80px 0 !important; }
+            #sec-b > div { padding: 0 20px !important; }
+            #sec-b .eyebrow { margin-bottom: 1rem !important; }
+            #sec-b-title { font-size: 26px !important; line-height: 1.35 !important; }
+            #sec-b-cards { grid-template-columns: 1fr !important; gap: 1.2rem !important; }
+            #sec-b-cards > div { padding: 1.5rem !important; border-radius: 12px !important; }
+            #sec-b-cards > div > div { gap: 0.8rem !important; }
+            #sec-b-cards > div > div > div { width: 36px !important; height: 36px !important; font-size: 16px !important; }
+            #sec-b-cards h3 { font-size: 15px !important; margin-bottom: 1rem !important; }
+            #sec-b-cards p { font-size: 13px !important; }
+
+            /* SEC-D 모바일 반응형 */
+            #sec-d { padding: 80px 0 !important; }
+            #sec-d > div { padding: 0 20px !important; }
+            #sec-d .eyebrow { margin-bottom: 1rem !important; }
+            #sec-d-title { font-size: 26px !important; line-height: 1.35 !important; }
+            #sec-d-cards { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+            #sec-d-cards > div { padding: 2rem !important; border-radius: 12px !important; }
+            #sec-d-cards > div > div:first-child { font-size: 42px !important; margin-bottom: 1rem !important; opacity: 0.25 !important; }
+            #sec-d-cards h3 { font-size: 17px !important; margin-bottom: 1rem !important; }
+            #sec-d-cards p { font-size: 13px !important; }
+
+            /* SEC-C 모바일 반응형 */
+            #sec-c { padding: 50px 20px !important; }
+            #sec-c > div { max-width: 100% !important; }
+            #sec-c h3 { font-size: 20px !important; margin-bottom: 1.5rem !important; }
+            #sec-c > div > div { grid-template-columns: 1fr !important; gap: 1rem !important; }
+            #sec-c > div > div > div { font-size: 12px !important; line-height: 1.8 !important; }
+            #sec-c > div > div > div p { margin: 0 !important; }
+            #sec-c > div > p { font-size: 11px !important; }
+        }
+
+        /* ════════════════════════════════════════
+           Super Mobile Responsive Design (Max 480px)
+        ════════════════════════════════════════ */
+        @media (max-width: 480px) {
+            /* SEC-A 초소형 모바일 */
+            #sec-a { padding: 60px 0 !important; }
+            #sec-a > div { padding: 0 16px !important; }
+            #sec-a-title { font-size: 22px !important; }
+            #sec-a-title br { display: none; }
+            #sec-a-items { gap: 1rem !important; }
+            #sec-a-items > div { gap: 0.6rem !important; }
+            #sec-a-items p { font-size: 12px !important; }
+            #sec-a-cta p:first-child { font-size: 14px !important; }
+
+            /* SEC-B 초소형 모바일 */
+            #sec-b { padding: 60px 0 !important; }
+            #sec-b > div { padding: 0 16px !important; }
+            #sec-b-title { font-size: 22px !important; }
+            #sec-b-title br { display: none; }
+            #sec-b-cards > div { padding: 1.2rem !important; }
+            #sec-b-cards h3 { font-size: 14px !important; }
+
+            /* SEC-D 초소형 모바일 */
+            #sec-d { padding: 60px 0 !important; }
+            #sec-d > div { padding: 0 16px !important; }
+            #sec-d-title { font-size: 22px !important; }
+            #sec-d-title br { display: none; }
+            #sec-d-cards { gap: 1rem !important; }
+            #sec-d-cards > div { padding: 1.5rem !important; }
+            #sec-d-cards > div > div:first-child { font-size: 32px !important; margin-bottom: 0.8rem !important; }
+            #sec-d-cards h3 { font-size: 15px !important; margin-bottom: 0.8rem !important; }
+            #sec-d-cards p { font-size: 12px !important; }
+
+            /* SEC-C 초소형 모바일 */
+            #sec-c { padding: 40px 16px !important; }
+            #sec-c h3 { font-size: 18px !important; margin-bottom: 1.2rem !important; }
+            #sec-c > div > div > div { font-size: 11px !important; }
+        }
     </style>
 </head>
 <body>
