@@ -852,76 +852,80 @@
         #sec-a-items { opacity: 0; transform: translateY(20px); }
         #sec-a-cta   { opacity: 0; transform: translateY(16px); }
 
-        /* ── SEC-A 인포그래픽 카드 그리드 ── */
+        /* ── SEC-A 인포그래픽 카드 (1×6 가로형) ── */
         .sit-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 860px;
             margin: 0 auto;
         }
         .sit-card {
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
             background: rgba(201,168,76,0.05);
             border: 1px solid rgba(201,168,76,0.18);
-            border-radius: 16px;
-            padding: 28px 24px 24px;
+            border-radius: 14px;
+            padding: 20px 28px;
             overflow: hidden;
             cursor: default;
             transition: background 0.35s ease, border-color 0.35s ease,
                         transform 0.38s cubic-bezier(0.2,1,0.2,1), box-shadow 0.38s ease;
         }
         .sit-card:hover {
-            background: rgba(201,168,76,0.12);
+            background: rgba(201,168,76,0.11);
             border-color: rgba(201,168,76,0.6);
-            transform: translateY(-7px);
-            box-shadow: 0 16px 40px rgba(201,168,76,0.18);
+            transform: translateX(6px);
+            box-shadow: 0 8px 32px rgba(201,168,76,0.16);
         }
-        /* 우상단 희미한 숫자 */
+        /* 좌측 숫자 */
         .sit-num {
-            position: absolute;
-            top: 12px; right: 18px;
             font-family: 'Playfair Display', serif;
-            font-size: 40px; font-weight: 900;
-            color: var(--gold); opacity: 0.1;
+            font-size: 28px; font-weight: 900;
+            color: var(--gold); opacity: 0.2;
             line-height: 1; user-select: none;
+            flex-shrink: 0; width: 32px; text-align: center;
             transition: opacity 0.35s ease;
         }
-        .sit-card:hover .sit-num { opacity: 0.22; }
+        .sit-card:hover .sit-num { opacity: 0.5; }
         /* 아이콘 박스 */
         .sit-icon {
-            width: 46px; height: 46px;
+            width: 44px; height: 44px;
             background: rgba(201,168,76,0.1);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            margin-bottom: 1.1rem;
+            flex-shrink: 0;
             transition: background 0.35s ease, transform 0.35s ease;
         }
         .sit-card:hover .sit-icon {
             background: rgba(201,168,76,0.22);
-            transform: scale(1.08);
+            transform: scale(1.1) rotate(-3deg);
         }
         .sit-icon svg { display: block; }
-        /* 본문 텍스트 */
+        /* 본문 텍스트 (flex:1 로 중앙 꽉 채움) */
         .sit-text {
+            flex: 1;
             font-family: 'Noto Sans KR', sans-serif;
-            font-size: 14px; font-weight: 500;
-            color: rgba(237,232,223,0.85);
-            line-height: 1.75;
-            margin-bottom: 1.2rem;
+            font-size: 15px; font-weight: 500;
+            color: rgba(237,232,223,0.9);
+            line-height: 1.6;
+            margin: 0;
         }
-        /* 하단 체크 배지 */
+        /* 우측 체크 배지 */
         .sit-badge {
-            display: inline-flex; align-items: center; gap: 6px;
-            padding: 5px 12px;
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 5px 13px;
             border-radius: 100px;
             background: rgba(201,168,76,0.08);
-            border: 1px solid rgba(201,168,76,0.25);
+            border: 1px solid rgba(201,168,76,0.22);
+            flex-shrink: 0;
             transition: background 0.35s ease, border-color 0.35s ease;
         }
         .sit-card:hover .sit-badge {
-            background: rgba(201,168,76,0.2);
-            border-color: rgba(201,168,76,0.55);
+            background: rgba(201,168,76,0.22);
+            border-color: rgba(201,168,76,0.6);
         }
         .sit-badge span {
             font-family: 'Noto Sans KR', sans-serif;
@@ -929,18 +933,23 @@
             color: var(--gold); letter-spacing: 0.1em;
             text-transform: uppercase;
         }
-        /* 카드 배경 글로우 효과 */
-        .sit-card::before {
+        /* 좌측 골드 액센트 라인 */
+        .sit-card::after {
             content: '';
-            position: absolute; inset: 0;
-            background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 65%);
+            position: absolute; left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--gold) 0%, transparent 100%);
             opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
+            border-radius: 14px 0 0 14px;
+            transition: opacity 0.35s ease;
         }
-        .sit-card:hover::before { opacity: 1; }
-        @media (max-width: 900px) { .sit-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 560px) { .sit-grid { grid-template-columns: 1fr; gap: 1rem; } .sit-card { padding: 22px 18px 18px; } }
+        .sit-card:hover::after { opacity: 0.7; }
+        @media (max-width: 640px) {
+            .sit-card { padding: 16px 18px; gap: 0.9rem; }
+            .sit-text { font-size: 13px; }
+            .sit-badge { display: none; }
+            .sit-num { display: none; }
+        }
 
         /* ── SEC-B 스타일 ── */
         #sec-b .eyebrow { display: flex; align-items: center; justify-content: center; gap: 1rem; }
@@ -1818,7 +1827,7 @@
                             <line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="16" r="0.5" fill="#C9A84C"/>
                         </svg>
                     </div>
-                    <p class="sit-text">배우자가 달라진 것 같은데,<br>확인할 방법을 모르겠어요.</p>
+                    <p class="sit-text">배우자가 달라진 것 같은데, 확인할 방법을 모르겠어요.</p>
                     <div class="sit-badge">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="#C9A84C"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                         <span>해당됩니다</span>
@@ -1834,7 +1843,7 @@
                             <polyline points="12 6 12 12 16 14"/>
                         </svg>
                     </div>
-                    <p class="sit-text">오래 참았는데,<br>이제는 정확히 알고 싶습니다.</p>
+                    <p class="sit-text">오래 참았는데, 이제는 정확히 알고 싶습니다.</p>
                     <div class="sit-badge">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="#C9A84C"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                         <span>해당됩니다</span>
@@ -1850,7 +1859,7 @@
                             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                         </svg>
                     </div>
-                    <p class="sit-text">자산 분할 전에 뭔가 숨기는 것 같다는<br>느낌이 들어요.</p>
+                    <p class="sit-text">자산 분할 전에 뭔가 숨기는 것 같다는 느낌이 들어요.</p>
                     <div class="sit-badge">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="#C9A84C"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                         <span>해당됩니다</span>
@@ -1867,7 +1876,7 @@
                             <line x1="12" y1="17" x2="12.01" y2="17"/>
                         </svg>
                     </div>
-                    <p class="sit-text">사기를 당한 것 같은데<br>상대방이 어디 있는지 모릅니다.</p>
+                    <p class="sit-text">사기를 당한 것 같은데 상대방이 어디 있는지 모릅니다.</p>
                     <div class="sit-badge">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="#C9A84C"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                         <span>해당됩니다</span>
@@ -1885,7 +1894,7 @@
                             <line x1="8" y1="23" x2="16" y2="23"/>
                         </svg>
                     </div>
-                    <p class="sit-text">내 사무실이나 집에 도청 기기가<br>있는 건 아닐까 의심돼요.</p>
+                    <p class="sit-text">내 사무실이나 집에 도청 기기가 있는 건 아닐까 의심돼요.</p>
                     <div class="sit-badge">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="#C9A84C"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                         <span>해당됩니다</span>
@@ -1901,7 +1910,7 @@
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                         </svg>
                     </div>
-                    <p class="sit-text">회사 내부 기밀이 새고<br>있는 것 같습니다.</p>
+                    <p class="sit-text">회사 내부 기밀이 새고 있는 것 같습니다.</p>
                     <div class="sit-badge">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="#C9A84C"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                         <span>해당됩니다</span>
