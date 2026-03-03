@@ -848,12 +848,99 @@
         /* ── SEC-A 스타일 ── */
         #sec-a .eyebrow { display: flex; align-items: center; justify-content: center; gap: 1rem; }
         #sec-a .eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
-        #sec-a svg { animation: float 3s ease-in-out infinite; }
-        #sec-a svg:nth-child(odd) { animation-delay: 0s; }
-        #sec-a svg:nth-child(even) { animation-delay: 1.5s; }
         /* SEC-A 애니메이션 초기 상태 (gsap.to 패턴용) */
         #sec-a-items { opacity: 0; transform: translateY(20px); }
         #sec-a-cta   { opacity: 0; transform: translateY(16px); }
+
+        /* ── SEC-A 인포그래픽 카드 그리드 ── */
+        .sit-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .sit-card {
+            position: relative;
+            background: rgba(201,168,76,0.05);
+            border: 1px solid rgba(201,168,76,0.18);
+            border-radius: 16px;
+            padding: 28px 24px 24px;
+            overflow: hidden;
+            cursor: default;
+            transition: background 0.35s ease, border-color 0.35s ease,
+                        transform 0.38s cubic-bezier(0.2,1,0.2,1), box-shadow 0.38s ease;
+        }
+        .sit-card:hover {
+            background: rgba(201,168,76,0.12);
+            border-color: rgba(201,168,76,0.6);
+            transform: translateY(-7px);
+            box-shadow: 0 16px 40px rgba(201,168,76,0.18);
+        }
+        /* 우상단 희미한 숫자 */
+        .sit-num {
+            position: absolute;
+            top: 12px; right: 18px;
+            font-family: 'Playfair Display', serif;
+            font-size: 40px; font-weight: 900;
+            color: var(--gold); opacity: 0.1;
+            line-height: 1; user-select: none;
+            transition: opacity 0.35s ease;
+        }
+        .sit-card:hover .sit-num { opacity: 0.22; }
+        /* 아이콘 박스 */
+        .sit-icon {
+            width: 46px; height: 46px;
+            background: rgba(201,168,76,0.1);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.1rem;
+            transition: background 0.35s ease, transform 0.35s ease;
+        }
+        .sit-card:hover .sit-icon {
+            background: rgba(201,168,76,0.22);
+            transform: scale(1.08);
+        }
+        .sit-icon svg { display: block; }
+        /* 본문 텍스트 */
+        .sit-text {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 14px; font-weight: 500;
+            color: rgba(237,232,223,0.85);
+            line-height: 1.75;
+            margin-bottom: 1.2rem;
+        }
+        /* 하단 체크 배지 */
+        .sit-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 12px;
+            border-radius: 100px;
+            background: rgba(201,168,76,0.08);
+            border: 1px solid rgba(201,168,76,0.25);
+            transition: background 0.35s ease, border-color 0.35s ease;
+        }
+        .sit-card:hover .sit-badge {
+            background: rgba(201,168,76,0.2);
+            border-color: rgba(201,168,76,0.55);
+        }
+        .sit-badge span {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 10px; font-weight: 700;
+            color: var(--gold); letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        /* 카드 배경 글로우 효과 */
+        .sit-card::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 65%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        .sit-card:hover::before { opacity: 1; }
+        @media (max-width: 900px) { .sit-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .sit-grid { grid-template-columns: 1fr; gap: 1rem; } .sit-card { padding: 22px 18px 18px; } }
 
         /* ── SEC-B 스타일 ── */
         #sec-b .eyebrow { display: flex; align-items: center; justify-content: center; gap: 1rem; }
@@ -1720,31 +1807,107 @@
                 <p class="eyebrow" style="color:var(--gold);justify-content:center;margin-bottom:1.5rem;"><span class="eyebrow-line"></span>Your Situation<span class="eyebrow-line"></span></p>
                 <h2 id="sec-a-title" class="section-title" style="color:var(--text-primary);">이런 상황이시라면,<br><span style="color:var(--gold);font-style:normal;">저희가 도울 수 있습니다</span></h2>
             </div>
-            <div id="sec-a-items" style="display:grid;gap:2rem;max-width:800px;margin:0 auto;">
-                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:2px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:16px;color:#EDE8DF;line-height:1.6;">배우자가 달라진 것 같은데, 확인할 방법을 모르겠어요.</p>
+            <div id="sec-a-items" class="sit-grid">
+
+                <!-- 카드 01 : 배우자 -->
+                <div class="sit-card">
+                    <div class="sit-num">01</div>
+                    <div class="sit-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="16" r="0.5" fill="#C9A84C"/>
+                        </svg>
+                    </div>
+                    <p class="sit-text">배우자가 달라진 것 같은데,<br>확인할 방법을 모르겠어요.</p>
+                    <div class="sit-badge">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="#C9A84C"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        <span>해당됩니다</span>
+                    </div>
                 </div>
-                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:2px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:16px;color:#EDE8DF;line-height:1.6;">오래 참았는데, 이제는 정확히 알고 싶습니다.</p>
+
+                <!-- 카드 02 : 오래 참음 -->
+                <div class="sit-card">
+                    <div class="sit-num">02</div>
+                    <div class="sit-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <p class="sit-text">오래 참았는데,<br>이제는 정확히 알고 싶습니다.</p>
+                    <div class="sit-badge">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="#C9A84C"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        <span>해당됩니다</span>
+                    </div>
                 </div>
-                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:2px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:16px;color:#EDE8DF;line-height:1.6;">자산 분할 전에 뭔가 숨기는 것 같다는 느낌이 들어요.</p>
+
+                <!-- 카드 03 : 자산 분할 -->
+                <div class="sit-card">
+                    <div class="sit-num">03</div>
+                    <div class="sit-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"/>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <p class="sit-text">자산 분할 전에 뭔가 숨기는 것 같다는<br>느낌이 들어요.</p>
+                    <div class="sit-badge">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="#C9A84C"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        <span>해당됩니다</span>
+                    </div>
                 </div>
-                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:2px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:16px;color:#EDE8DF;line-height:1.6;">사기를 당한 것 같은데 상대방이 어디 있는지 모릅니다.</p>
+
+                <!-- 카드 04 : 사기 -->
+                <div class="sit-card">
+                    <div class="sit-num">04</div>
+                    <div class="sit-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <p class="sit-text">사기를 당한 것 같은데<br>상대방이 어디 있는지 모릅니다.</p>
+                    <div class="sit-badge">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="#C9A84C"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        <span>해당됩니다</span>
+                    </div>
                 </div>
-                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:2px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:16px;color:#EDE8DF;line-height:1.6;">내 사무실이나 집에 도청 기기가 있는 건 아닐까 의심돼요.</p>
+
+                <!-- 카드 05 : 도청 -->
+                <div class="sit-card">
+                    <div class="sit-num">05</div>
+                    <div class="sit-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                            <line x1="12" y1="19" x2="12" y2="23"/>
+                            <line x1="8" y1="23" x2="16" y2="23"/>
+                        </svg>
+                    </div>
+                    <p class="sit-text">내 사무실이나 집에 도청 기기가<br>있는 건 아닐까 의심돼요.</p>
+                    <div class="sit-badge">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="#C9A84C"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        <span>해당됩니다</span>
+                    </div>
                 </div>
-                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:2px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:16px;color:#EDE8DF;line-height:1.6;">회사 내부 기밀이 새고 있는 것 같습니다.</p>
+
+                <!-- 카드 06 : 기업 기밀 -->
+                <div class="sit-card">
+                    <div class="sit-num">06</div>
+                    <div class="sit-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <p class="sit-text">회사 내부 기밀이 새고<br>있는 것 같습니다.</p>
+                    <div class="sit-badge">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="#C9A84C"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        <span>해당됩니다</span>
+                    </div>
                 </div>
+
             </div>
             <div style="text-align:center;margin-top:4rem;" id="sec-a-cta">
                 <p style="font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);font-weight:700;margin-bottom:1.5rem;">하나라도 해당되신다면,<br>지금 무료 상담을 받아보세요.</p>
