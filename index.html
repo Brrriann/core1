@@ -951,12 +951,72 @@
             .sit-num { display: none; }
         }
 
-        /* ── SEC-B 스타일 ── */
+        /* ── SEC-B 스타일 (2×2 균등 그리드) ── */
+        #sec-b-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
         #sec-b .eyebrow { display: flex; align-items: center; justify-content: center; gap: 1rem; }
         #sec-b .eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
-        /* SEC-B 애니메이션 초기 상태 */
-        #sec-b-cards > div { opacity: 0; transform: translateY(24px) scale(0.95); transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; }
-        #sec-b-cards > div:hover { background: rgba(201,168,76,0.15); box-shadow: 0 8px 24px rgba(201,168,76,0.2); transform: translateY(-4px); }
+        /* SEC-B 카드 */
+        #sec-b-cards > div {
+            background: rgba(201,168,76,0.08);
+            border: 1px solid rgba(201,168,76,0.25);
+            border-radius: 16px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(24px) scale(0.95);
+            transition: background 0.35s ease, border-color 0.35s ease,
+                        box-shadow 0.35s ease, transform 0.38s cubic-bezier(0.2,1,0.2,1);
+            cursor: default;
+        }
+        #sec-b-cards > div:hover {
+            background: rgba(201,168,76,0.16);
+            border-color: rgba(201,168,76,0.6);
+            box-shadow: 0 12px 36px rgba(201,168,76,0.2);
+            transform: translateY(-8px) scale(1);
+        }
+        #sec-b-cards > div > div:first-child {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+        #sec-b-cards > div > div > div {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #070707;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+            transition: transform 0.35s ease;
+        }
+        #sec-b-cards > div:hover > div > div { transform: scale(1.1); }
+        #sec-b-cards h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            color: white;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.5;
+        }
+        #sec-b-cards p {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 14px;
+            color: rgba(237,232,223,0.85);
+            line-height: 1.75;
+            margin: 1rem 0 0 0;
+        }
 
         /* ── SEC-D 스타일 ── */
         #sec-d .eyebrow { display: flex; align-items: center; justify-content: center; gap: 1rem; }
@@ -1251,14 +1311,14 @@
 
             /* SEC-B 모바일 반응형 */
             #sec-b { padding: 80px 0 !important; }
-            #sec-b > div { padding: 0 20px !important; }
+            #sec-b > div { padding: 0 20px !important; max-width: 100% !important; }
             #sec-b .eyebrow { margin-bottom: 1rem !important; }
             #sec-b-title { font-size: 26px !important; line-height: 1.35 !important; }
-            #sec-b-cards { grid-template-columns: 1fr !important; gap: 1.2rem !important; }
-            #sec-b-cards > div { padding: 1.5rem !important; border-radius: 12px !important; }
-            #sec-b-cards > div > div { gap: 0.8rem !important; }
-            #sec-b-cards > div > div > div { width: 36px !important; height: 36px !important; font-size: 16px !important; }
-            #sec-b-cards h3 { font-size: 15px !important; margin-bottom: 1rem !important; }
+            #sec-b-cards { grid-template-columns: 1fr !important; gap: 1.5rem !important; max-width: 100% !important; }
+            #sec-b-cards > div { padding: 24px !important; }
+            #sec-b-cards > div > div { gap: 0.8rem !important; margin-bottom: 1rem !important; }
+            #sec-b-cards > div > div > div { width: 40px !important; height: 40px !important; font-size: 16px !important; }
+            #sec-b-cards h3 { font-size: 15px !important; }
             #sec-b-cards p { font-size: 13px !important; }
 
             /* SEC-D 모바일 반응형 */
@@ -1301,8 +1361,11 @@
             #sec-b > div { padding: 0 16px !important; }
             #sec-b-title { font-size: 22px !important; }
             #sec-b-title br { display: none; }
-            #sec-b-cards > div { padding: 1.2rem !important; }
-            #sec-b-cards h3 { font-size: 14px !important; }
+            #sec-b-cards { gap: 1rem !important; }
+            #sec-b-cards > div { padding: 18px !important; }
+            #sec-b-cards > div > div > div { width: 36px !important; height: 36px !important; font-size: 15px !important; }
+            #sec-b-cards h3 { font-size: 13px !important; }
+            #sec-b-cards p { font-size: 12px !important; }
 
             /* SEC-D 초소형 모바일 */
             #sec-d { padding: 60px 0 !important; }
@@ -1934,34 +1997,34 @@
                 <p class="eyebrow" style="color:var(--gold);justify-content:center;margin-bottom:1.5rem;"><span class="eyebrow-line"></span>Before Consulting<span class="eyebrow-line"></span></p>
                 <h2 id="sec-b-title" class="section-title" style="color:var(--text-primary);">상담하기 전,<br><span style="color:var(--gold);font-style:normal;">이런 걱정이 드셨나요?</span></h2>
             </div>
-            <div id="sec-b-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;">
-                <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:16px;padding:2.5rem;backdrop-filter:blur(10px);transition:all 0.3s ease;">
-                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
-                        <div style="width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#070707;font-weight:700;font-size:18px;flex-shrink:0;">1</div>
-                        <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:white;font-weight:700;">예민한 건지 문제인지</h3>
+            <div id="sec-b-cards">
+                <div>
+                    <div>
+                        <div>1</div>
+                        <h3>예민한 건지 문제인지</h3>
                     </div>
-                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:rgba(237,232,223,0.85);line-height:1.8;">그 판단 자체를 저희가 도와드립니다. 상담은 무료입니다.</p>
+                    <p>그 판단 자체를 저희가 도와드립니다. 상담은 무료입니다.</p>
                 </div>
-                <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:16px;padding:2.5rem;backdrop-filter:blur(10px);transition:all 0.3s ease;">
-                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
-                        <div style="width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#070707;font-weight:700;font-size:18px;flex-shrink:0;">2</div>
-                        <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:white;font-weight:700;">의뢰가 들통나면</h3>
+                <div>
+                    <div>
+                        <div>2</div>
+                        <h3>의뢰가 들통나면</h3>
                     </div>
-                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:rgba(237,232,223,0.85);line-height:1.8;">의뢰 사실, 상담 내용, 연락처 — 그 무엇도 외부에 공개되지 않습니다.</p>
+                    <p>의뢰 사실, 상담 내용, 연락처 — 그 무엇도 외부에 공개되지 않습니다.</p>
                 </div>
-                <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:16px;padding:2.5rem;backdrop-filter:blur(10px);transition:all 0.3s ease;">
-                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
-                        <div style="width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#070707;font-weight:700;font-size:18px;flex-shrink:0;">3</div>
-                        <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:white;font-weight:700;">비용이 많이 들까봐</h3>
+                <div>
+                    <div>
+                        <div>3</div>
+                        <h3>비용이 많이 들까봐</h3>
                     </div>
-                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:rgba(237,232,223,0.85);line-height:1.8;">상담 후 범위와 비용을 먼저 안내합니다. 결정은 고객님 몫입니다.</p>
+                    <p>상담 후 범위와 비용을 먼저 안내합니다. 결정은 고객님 몫입니다.</p>
                 </div>
-                <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:16px;padding:2.5rem;backdrop-filter:blur(10px);transition:all 0.3s ease;">
-                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
-                        <div style="width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#070707;font-weight:700;font-size:18px;flex-shrink:0;">4</div>
-                        <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:white;font-weight:700;">법적 문제가 생기면</h3>
+                <div>
+                    <div>
+                        <div>4</div>
+                        <h3>법적 문제가 생기면</h3>
                     </div>
-                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:rgba(237,232,223,0.85);line-height:1.8;">모든 조사는 공인 자격 내에서 합법적으로 진행됩니다. 법률 자문과 함께 진행하기 때문에 법적 리스크를 최소화합니다.</p>
+                    <p>모든 조사는 공인 자격 내에서 합법적으로 진행됩니다. 법률 자문과 함께 진행하기 때문에 법적 리스크를 최소화합니다.</p>
                 </div>
             </div>
         </div>
