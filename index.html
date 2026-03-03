@@ -845,6 +845,28 @@
             color: white;
         }
 
+        /* ── SEC-A 스타일 ── */
+        #sec-a .eyebrow { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+        #sec-a .eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
+        #sec-a svg { animation: float 3s ease-in-out infinite; }
+        #sec-a svg:nth-child(odd) { animation-delay: 0s; }
+        #sec-a svg:nth-child(even) { animation-delay: 1.5s; }
+
+        /* ── SEC-B 스타일 ── */
+        #sec-b .eyebrow { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+        #sec-b .eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
+        #sec-b-cards > div:hover { background: rgba(201,168,76,0.15); box-shadow: 0 8px 24px rgba(201,168,76,0.2); transform: translateY(-4px); }
+
+        /* ── SEC-D 스타일 ── */
+        #sec-d .eyebrow { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+        #sec-d .eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
+        #sec-d-cards > div:hover { background: rgba(201,168,76,0.12); box-shadow: 0 12px 36px rgba(201,168,76,0.25); transform: translateY(-6px); }
+
+        /* ── SEC-C (Footer SEO) 스타일 ── */
+        #sec-c p { margin: 0; }
+
+        @keyframes float { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+
         /* 모바일 반응형 (768px 이하) */
         @media (max-width: 768px) {
             #sec-6 { padding: 80px 0 120px 0; }
@@ -1594,6 +1616,119 @@
     </section>
 
     <!-- ══════════════════════════════════════
+         SEC-A : 이런 분들이 연락하셨습니다
+    ══════════════════════════════════════ -->
+    <section id="sec-a" style="background-color:#0C0C0C;padding:140px 0;overflow:hidden;">
+        <div style="max-width:1200px;width:100%;padding:0 40px;margin:0 auto;">
+            <div style="text-align:center;margin-bottom:4rem;">
+                <p class="eyebrow" style="color:var(--gold);justify-content:center;margin-bottom:1.5rem;"><span class="eyebrow-line"></span>Your Situation<span class="eyebrow-line"></span></p>
+                <h2 id="sec-a-title" class="section-title" style="color:var(--text-primary);opacity:0;">이런 상황이시라면,<br><span style="color:var(--gold);font-style:normal;">저희가 도울 수 있습니다</span></h2>
+            </div>
+            <div id="sec-a-items" style="display:grid;gap:2rem;max-width:800px;margin:0 auto;opacity:0;">
+                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:2px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:16px;color:#EDE8DF;line-height:1.6;">배우자가 달라진 것 같은데, 확인할 방법을 모르겠어요.</p>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:2px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:16px;color:#EDE8DF;line-height:1.6;">오래 참았는데, 이제는 정확히 알고 싶습니다.</p>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:2px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:16px;color:#EDE8DF;line-height:1.6;">자산 분할 전에 뭔가 숨기는 것 같다는 느낌이 들어요.</p>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:2px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:16px;color:#EDE8DF;line-height:1.6;">사기를 당한 것 같은데 상대방이 어디 있는지 모릅니다.</p>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:2px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:16px;color:#EDE8DF;line-height:1.6;">내 사무실이나 집에 도청 기기가 있는 건 아닐까 의심돼요.</p>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:1.2rem;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gold)" style="flex-shrink:0;margin-top:2px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:16px;color:#EDE8DF;line-height:1.6;">회사 내부 기밀이 새고 있는 것 같습니다.</p>
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:4rem;opacity:0;" id="sec-a-cta">
+                <p style="font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);font-weight:700;margin-bottom:1.5rem;">하나라도 해당되신다면,<br>지금 무료 상담을 받아보세요.</p>
+                <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:rgba(237,232,223,0.7);line-height:1.6;">말씀하기 어려운 내용일수록 저희는 더 조심스럽게 듣겠습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SEC-B : 상담 전 걱정들
+    ══════════════════════════════════════ -->
+    <section id="sec-b" style="background-color:#060606;padding:140px 0;overflow:hidden;">
+        <div style="max-width:1000px;width:100%;padding:0 40px;margin:0 auto;">
+            <div style="text-align:center;margin-bottom:4rem;">
+                <p class="eyebrow" style="color:var(--gold);justify-content:center;margin-bottom:1.5rem;"><span class="eyebrow-line"></span>Before Consulting<span class="eyebrow-line"></span></p>
+                <h2 id="sec-b-title" class="section-title" style="color:var(--text-primary);opacity:0;">상담하기 전,<br><span style="color:var(--gold);font-style:normal;">이런 걱정이 드셨나요?</span></h2>
+            </div>
+            <div id="sec-b-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;opacity:0;">
+                <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:16px;padding:2.5rem;backdrop-filter:blur(10px);transition:all 0.3s ease;">
+                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+                        <div style="width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#070707;font-weight:700;font-size:18px;flex-shrink:0;">1</div>
+                        <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:white;font-weight:700;">예민한 건지 문제인지</h3>
+                    </div>
+                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:rgba(237,232,223,0.85);line-height:1.8;">그 판단 자체를 저희가 도와드립니다. 상담은 무료입니다.</p>
+                </div>
+                <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:16px;padding:2.5rem;backdrop-filter:blur(10px);transition:all 0.3s ease;">
+                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+                        <div style="width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#070707;font-weight:700;font-size:18px;flex-shrink:0;">2</div>
+                        <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:white;font-weight:700;">의뢰가 들통나면</h3>
+                    </div>
+                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:rgba(237,232,223,0.85);line-height:1.8;">의뢰 사실, 상담 내용, 연락처 — 그 무엇도 외부에 공개되지 않습니다.</p>
+                </div>
+                <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:16px;padding:2.5rem;backdrop-filter:blur(10px);transition:all 0.3s ease;">
+                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+                        <div style="width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#070707;font-weight:700;font-size:18px;flex-shrink:0;">3</div>
+                        <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:white;font-weight:700;">비용이 많이 들까봐</h3>
+                    </div>
+                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:rgba(237,232,223,0.85);line-height:1.8;">상담 후 범위와 비용을 먼저 안내합니다. 결정은 고객님 몫입니다.</p>
+                </div>
+                <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:16px;padding:2.5rem;backdrop-filter:blur(10px);transition:all 0.3s ease;">
+                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+                        <div style="width:40px;height:40px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#070707;font-weight:700;font-size:18px;flex-shrink:0;">4</div>
+                        <h3 style="font-family:'Playfair Display',serif;font-size:18px;color:white;font-weight:700;">법적 문제가 생기면</h3>
+                    </div>
+                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:rgba(237,232,223,0.85);line-height:1.8;">모든 조사는 공인 자격 내에서 합법적으로 진행됩니다. 법률 자문과 함께 진행하기 때문에 법적 리스크를 최소화합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SEC-D : 코어탐정을 선택하는 이유
+    ══════════════════════════════════════ -->
+    <section id="sec-d" style="background-color:#080E1C;padding:140px 0;overflow:hidden;">
+        <div style="max-width:1200px;width:100%;padding:0 40px;margin:0 auto;">
+            <div style="text-align:center;margin-bottom:4rem;">
+                <p class="eyebrow" style="color:var(--gold);justify-content:center;margin-bottom:1.5rem;"><span class="eyebrow-line"></span>Why Core Detective<span class="eyebrow-line"></span></p>
+                <h2 id="sec-d-title" class="section-title" style="color:var(--text-primary);opacity:0;">수많은 탐정사무소 중,<br><span style="color:var(--gold);font-style:normal;">왜 코어탐정인가요?</span></h2>
+            </div>
+            <div id="sec-d-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.5rem;opacity:0;">
+                <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:16px;padding:3rem;backdrop-filter:blur(10px);transition:all 0.3s ease;">
+                    <div style="font-family:'Playfair Display',serif;font-size:56px;color:var(--gold);font-weight:900;margin-bottom:1.5rem;opacity:0.3;">1</div>
+                    <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:white;font-weight:700;margin-bottom:1.5rem;">자격증이 있는 탐정입니다.</h3>
+                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:15px;color:rgba(237,232,223,0.8);line-height:1.8;">대한민국에서 공인 탐정 자격을 보유한 곳은 많지 않습니다. 코어탐정은 복수의 공인 자격과 15년 현장 경력을 함께 갖추고 있습니다.</p>
+                </div>
+                <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:16px;padding:3rem;backdrop-filter:blur(10px);transition:all 0.3s ease;">
+                    <div style="font-family:'Playfair Display',serif;font-size:56px;color:var(--gold);font-weight:900;margin-bottom:1.5rem;opacity:0.3;">2</div>
+                    <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:white;font-weight:700;margin-bottom:1.5rem;">수집한 자료가 실제로 쓰입니다.</h3>
+                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:15px;color:rgba(237,232,223,0.8);line-height:1.8;">법정에서 증거로 채택되지 않는 자료는 의미가 없습니다. 코어탐정은 법률 자문과 함께 처음부터 법적 효력을 고려해 자료를 수집합니다.</p>
+                </div>
+                <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:16px;padding:3rem;backdrop-filter:blur(10px);transition:all 0.3s ease;">
+                    <div style="font-family:'Playfair Display',serif;font-size:56px;color:var(--gold);font-weight:900;margin-bottom:1.5rem;opacity:0.3;">3</div>
+                    <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:white;font-weight:700;margin-bottom:1.5rem;">비밀은 끝까지 지킵니다.</h3>
+                    <p style="font-family:'Noto Sans KR',sans-serif;font-size:15px;color:rgba(237,232,223,0.8);line-height:1.8;">상담 사실, 의뢰 내용, 수사 과정 — 어느 것도 유출되지 않습니다. 국가공인 보안 관리사 자격을 보유한 전문가가 직접 보안을 관리합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
          SEC-9 : 최종 CTA
     ══════════════════════════════════════ -->
     <section id="sec-9">
@@ -1615,6 +1750,27 @@
             </div>
         </div>
     </section>
+
+    <!-- ══════════════════════════════════════
+         SEC-C : 전국 서비스 (SEO)
+    ══════════════════════════════════════ -->
+    <div id="sec-c" style="padding:80px 40px;text-align:center;background-color:#070707;border-top:1px solid rgba(201,168,76,0.2);">
+        <div style="max-width:1200px;margin:0 auto;">
+            <h3 style="font-family:'Playfair Display',serif;font-size:28px;color:var(--gold);font-weight:700;margin-bottom:2rem;">전국 어디서든 연결됩니다</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2.5rem;">
+                <div style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:rgba(237,232,223,0.7);line-height:2;">
+                    <p>서울 탐정사무소 | 경기 탐정사무소 | 인천 탐정 상담</p>
+                </div>
+                <div style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:rgba(237,232,223,0.7);line-height:2;">
+                    <p>부산 사설탐정 | 대구 탐정사무소 | 대전 증거 수집</p>
+                </div>
+                <div style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:rgba(237,232,223,0.7);line-height:2;">
+                    <p>광주 탐정 상담 | 울산 개인조사 | 제주 탐정 상담</p>
+                </div>
+            </div>
+            <p style="font-family:'Noto Sans KR',sans-serif;font-size:13px;color:rgba(201,168,76,0.8);">전국 출장 수사 가능 · 직접 방문 없이 비대면 상담 가능</p>
+        </div>
+    </div>
 
     <!-- ══ BOTTOM BAR ══ -->
     <div id="sticky-bottom-bar">
@@ -1765,6 +1921,40 @@
                 duration: 0.85, stagger: { amount: 0.52, ease: 'power1.inOut' }, ease: 'power3.out',
                 scrollTrigger: { trigger: '#sec-8', start: 'top 55%' }
             });
+
+            /* ── SEC-A: 이런 분들이 연락하셨습니다 ── */
+            gsap.from('#sec-a-title', {
+                opacity: 0, y: 38, duration: 1.0, ease: 'expo.out',
+                scrollTrigger: { trigger: '#sec-a', start: 'top 55%' }
+            });
+            gsap.from('#sec-a-items', {
+                opacity: 0, y: 30, duration: 0.95, ease: 'power3.out',
+                scrollTrigger: { trigger: '#sec-a', start: 'top 55%' }
+            }, '-=0.4');
+            gsap.from('#sec-a-cta', {
+                opacity: 0, y: 24, duration: 0.85, ease: 'power3.out',
+                scrollTrigger: { trigger: '#sec-a', start: 'top 55%' }
+            }, '-=0.3');
+
+            /* ── SEC-B: 상담 전 걱정들 ── */
+            gsap.from('#sec-b-title', {
+                opacity: 0, y: 38, duration: 1.0, ease: 'expo.out',
+                scrollTrigger: { trigger: '#sec-b', start: 'top 55%' }
+            });
+            gsap.from('#sec-b-cards > div', {
+                opacity: 0, y: 32, scale: 0.92, duration: 0.8, stagger: { amount: 0.4, ease: 'power1.inOut' }, ease: 'back.out(1.5)',
+                scrollTrigger: { trigger: '#sec-b', start: 'top 55%' }
+            }, '-=0.3');
+
+            /* ── SEC-D: 코어탐정을 선택하는 이유 ── */
+            gsap.from('#sec-d-title', {
+                opacity: 0, y: 38, duration: 1.0, ease: 'expo.out',
+                scrollTrigger: { trigger: '#sec-d', start: 'top 55%' }
+            });
+            gsap.from('#sec-d-cards > div', {
+                opacity: 0, y: 36, scale: 0.9, duration: 0.85, stagger: { amount: 0.45, ease: 'power1.inOut' }, ease: 'back.out(1.3)',
+                scrollTrigger: { trigger: '#sec-d', start: 'top 55%' }
+            }, '-=0.4');
 
             /* ── SEC-9: 최종 CTA ── */
             gsap.timeline({ scrollTrigger: { trigger: '#sec-9', start: 'top 58%' } })
