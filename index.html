@@ -1082,7 +1082,7 @@
         #sec-d-cards > div:hover { background: rgba(201,168,76,0.12); box-shadow: 0 12px 36px rgba(201,168,76,0.25); transform: translateY(-6px); }
 
         /* ── SITE FOOTER ── */
-        .site-footer { background:#111318; border-top:1px solid #272b36; padding:0; position:relative; overflow:hidden; }
+        .site-footer { background:#111318; border-top:1px solid #272b36; padding:0 0 140px 0; position:relative; overflow:hidden; }
         .site-footer::before { content:''; display:block; height:3px; background:linear-gradient(90deg,transparent,#c9a84c,transparent); }
         .footer-services { background:#191c24; padding:36px 40px; border-bottom:1px solid #272b36; }
         .footer-services h2 { font-family:'Noto Serif KR',serif; font-size:0.72rem; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:#c9a84c; margin-bottom:20px; }
@@ -1123,6 +1123,7 @@
         .footer-bottom-inner a:hover { color:#8a8f9e; }
         .footer-bottom-inner span { margin:0 8px; opacity:0.4; }
         @media (max-width:900px) {
+            .site-footer { padding: 0 0 160px 0; }
             .footer-main { grid-template-columns:1fr; gap:32px; padding:40px 24px; }
             .footer-services, .footer-seo, .footer-keywords { padding:28px 24px; }
             .footer-bottom { padding:18px 24px; }
