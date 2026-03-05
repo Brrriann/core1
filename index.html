@@ -1177,6 +1177,20 @@
         .lightbox img { max-width: 88vw; max-height: 88vh; border-radius: 10px; object-fit: contain; }
         .lightbox-close { position: absolute; top: 28px; right: 32px; font-size: 28px; color: var(--gold); cursor: pointer; background: none; border: none; font-family: 'Playfair Display', serif; line-height: 1; }
 
+        /* ── Legal Modal ── */
+        .legal-modal { position: fixed; inset: 0; z-index: 999999; background: rgba(4,4,4,0.96); display: none; align-items: center; justify-content: center; backdrop-filter: blur(12px); padding: 20px; }
+        .legal-modal.open { display: flex; }
+        .legal-modal-content { background: #111318; border: 1px solid #272b36; border-radius: 12px; width: 100%; max-width: 800px; max-height: 85vh; overflow-y: auto; padding: 48px; color: #f0f0ef; }
+        .legal-modal-close { position: absolute; top: 24px; right: 28px; font-size: 32px; color: #c9a84c; cursor: pointer; background: none; border: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+        .legal-modal-close:hover { color: #e4c97a; }
+        .legal-modal h2 { font-family: 'Noto Serif KR', serif; font-size: 1.8rem; color: #c9a84c; margin-bottom: 1.5rem; }
+        .legal-modal h3 { font-family: 'Noto Serif KR', serif; font-size: 1rem; color: #c9a84c; margin-top: 1.5rem; margin-bottom: 0.8rem; }
+        .legal-modal p { font-family: 'Noto Sans KR', sans-serif; font-size: 0.95rem; color: #b0b5c6; line-height: 1.8; margin-bottom: 1rem; }
+        .legal-modal ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+        .legal-modal li { font-family: 'Noto Sans KR', sans-serif; font-size: 0.95rem; color: #b0b5c6; line-height: 1.8; margin-bottom: 0.5rem; }
+        .legal-modal a { color: #c9a84c; text-decoration: none; }
+        .legal-modal a:hover { color: #e4c97a; text-decoration: underline; }
+
         /* ══ SEC-7: 처음이라 막막하셔도 괜찮습니다 ══ */
         #sec-7 { display: block; padding: 140px 0; background-color: #080E1C; }
         #sec-7 .inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
@@ -1893,6 +1907,122 @@
         <img src="" id="lightbox-img" alt="자격증 원본">
     </div>
 
+    <!-- Legal Modals -->
+    <!-- Privacy Policy Modal -->
+    <div class="legal-modal" id="privacyModal" role="dialog" aria-modal="true">
+        <button class="legal-modal-close" onclick="closeModal('privacyModal')" aria-label="닫기">×</button>
+        <div class="legal-modal-content">
+            <h2>개인정보처리방침</h2>
+            <p>코어탐정사무소(이하 "회사")는 개인정보보호법을 준수하며, 고객의 개인정보를 소중하게 다룹니다.</p>
+
+            <h3>1. 수집하는 개인정보</h3>
+            <p>회사는 다음과 같은 개인정보를 수집합니다:</p>
+            <ul>
+                <li>상담 신청 시: 성명, 연락처(전화번호), 상담 내용</li>
+                <li>카카오톡 상담 시: 카카오 계정 정보, 상담 기록</li>
+                <li>웹사이트 방문 시: IP 주소, 접속 시간, 방문 페이지 등 (로그 데이터)</li>
+            </ul>
+
+            <h3>2. 개인정보의 이용목적</h3>
+            <ul>
+                <li>민간조사 서비스 제공 및 상담 응대</li>
+                <li>고객 문의 답변 및 사후관리</li>
+                <li>부정거래 탐지 및 방지</li>
+                <li>서비스 개선 및 통계 분석</li>
+            </ul>
+
+            <h3>3. 개인정보 보유기간</h3>
+            <p>회사는 개인정보를 수집 목적 달성 시까지 보유합니다. 다만, 관련 법령에 따라 다음과 같이 보유합니다:</p>
+            <ul>
+                <li>상담 기록: 서비스 제공 완료 후 3년</li>
+                <li>계약 관련 서류: 계약 종료 후 5년</li>
+            </ul>
+
+            <h3>4. 개인정보의 보안</h3>
+            <p>회사는 개인정보를 안전하게 보호하기 위해 다음과 같은 조치를 취합니다:</p>
+            <ul>
+                <li>전자 자료는 암호화하여 저장 및 관리</li>
+                <li>비밀번호는 일방향 암호화하여 저장</li>
+                <li>접근 권한을 최소화하여 관리</li>
+                <li>정기적인 보안 감시 및 점검</li>
+            </ul>
+
+            <h3>5. 사용자의 권리</h3>
+            <p>고객은 다음 권리를 행사할 수 있습니다:</p>
+            <ul>
+                <li>개인정보 조회, 수정, 삭제 요청</li>
+                <li>개인정보 처리 정지 요청</li>
+                <li>개인정보 이용 동의 철회</li>
+            </ul>
+            <p>위 권리 행사는 전화(010-7617-7978) 또는 서면으로 요청할 수 있습니다.</p>
+
+            <h3>6. 개인정보보호책임자</h3>
+            <p>대표자: 홍진혁 | 전화: 010-7617-7978</p>
+
+            <h3>7. 정책 변경</h3>
+            <p>본 방침은 관련 법령 또는 회사 정책에 따라 변경될 수 있으며, 변경 시 웹사이트를 통해 공지합니다.</p>
+            <p><strong>최종 수정일: 2025년 3월</strong></p>
+        </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div class="legal-modal" id="termsModal" role="dialog" aria-modal="true">
+        <button class="legal-modal-close" onclick="closeModal('termsModal')" aria-label="닫기">×</button>
+        <div class="legal-modal-content">
+            <h2>이용약관</h2>
+
+            <h3>1. 서비스 개요</h3>
+            <p>코어탐정사무소(이하 "회사")는 민간조사 서비스를 제공합니다. 본 약관은 회사의 서비스 이용에 관한 권리·의무 및 책임사항을 규정합니다.</p>
+
+            <h3>2. 서비스 이용 조건</h3>
+            <ul>
+                <li>이용자는 관련 법령을 준수해야 합니다.</li>
+                <li>불법적 목적으로 서비스를 이용할 수 없습니다.</li>
+                <li>타인의 개인정보를 불법으로 수집하게 할 수 없습니다.</li>
+            </ul>
+
+            <h3>3. 회사의 책임</h3>
+            <ul>
+                <li>회사는 정식 등록 민간조사 기관입니다.</li>
+                <li>모든 조사는 관련 법령의 범위 내에서 수행됩니다.</li>
+                <li>수집된 자료는 법률 전문가 검토를 거쳐 법적 효력을 확보합니다.</li>
+            </ul>
+
+            <h3>4. 이용자의 책임</h3>
+            <ul>
+                <li>이용자는 상담 신청 정보의 정확성을 보장합니다.</li>
+                <li>회사의 조사 과정에서 협력해야 합니다.</li>
+                <li>불법적 목적으로 회사를 이용할 경우 책임을 집니다.</li>
+            </ul>
+
+            <h3>5. 료금 및 결제</h3>
+            <ul>
+                <li>초기 상담은 무료입니다.</li>
+                <li>본 조사 비용은 상담 후 투명하게 안내합니다.</li>
+                <li>결제 방법은 상담 시 협의합니다.</li>
+            </ul>
+
+            <h3>6. 중단 및 해지</h3>
+            <ul>
+                <li>회사는 이용자가 관련 법령 위반 시 서비스를 중단할 수 있습니다.</li>
+                <li>조사 계약은 상호 합의에 따라 해지할 수 있습니다.</li>
+            </ul>
+
+            <h3>7. 비밀 보장</h3>
+            <p>회사는 의뢰인의 모든 정보와 조사 과정을 철저히 비밀로 유지합니다. 이는 법적 비밀유지 의무입니다.</p>
+
+            <h3>8. 책임 제한</h3>
+            <p>회사는 천재지변, 전쟁, 자연재해 등 불가항력으로 인한 손해에 대해 책임을 지지 않습니다.</p>
+
+            <h3>9. 분쟁 해결</h3>
+            <p>본 약관에서 발생하는 분쟁은 대구지방법원을 관할 법원으로 합니다.</p>
+
+            <h3>10. 약관 변경</h3>
+            <p>회사는 관련 법령 변경에 따라 본 약관을 수정할 수 있으며, 변경 시 웹사이트에서 공지합니다.</p>
+            <p><strong>최종 수정일: 2025년 3월</strong></p>
+        </div>
+    </div>
+
     <!-- ══════════════════════════════════════
          SEC-6 : 검증 트러스트 갤러리
     ══════════════════════════════════════ -->
@@ -2377,7 +2507,7 @@
       <div class="footer-bottom">
         <div class="footer-bottom-inner">
           <div>COPYRIGHT © 2025 코어탐정사무소. ALL RIGHTS RESERVED.<span>|</span>대표자 : 홍진혁<span>|</span>사업자등록번호 : 776-13-02876</div>
-          <div><a href="/privacy">개인정보처리방침</a><span>|</span><a href="/terms">이용약관</a><span>|</span><a href="/sitemap.xml">사이트맵</a></div>
+          <div><a href="javascript:openPrivacy()" style="cursor:pointer;">개인정보처리방침</a><span>|</span><a href="javascript:openTerms()" style="cursor:pointer;">이용약관</a><span>|</span><a href="javascript:alert('사이트맵 준비 중입니다.')" style="cursor:pointer;">사이트맵</a></div>
         </div>
       </div>
     </footer>
@@ -2413,6 +2543,18 @@
             document.getElementById('lightbox').classList.remove('open');
             document.body.style.overflow = '';
         }
+
+        /* ── Legal Modal Functions ── */
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        function openPrivacy() { openModal('privacyModal'); }
+        function openTerms() { openModal('termsModal'); }
 
         /* ── 텍스트 분해 ── */
         function splitTextSafe(el) {
@@ -2561,6 +2703,20 @@
             });
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') closeLightbox();
+            });
+
+            /* ── Legal Modal 이벤트 ── */
+            ['privacyModal', 'termsModal'].forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) closeModal(modalId);
+                });
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal('privacyModal');
+                    closeModal('termsModal');
+                }
             });
 
             /* FAQ 아코디언 */
