@@ -2701,17 +2701,23 @@
                 .from('.cta-subtitle',    { opacity: 0, y: 32, duration: 0.95, ease: 'power3.out' }, '-=0.6')
                 .from('.cta-button-wrap', { opacity: 0, y: 24, duration: 0.9,  ease: 'power3.out' }, '-=0.55');
 
-            /* ── 후기섹션 마우스 호버 애니메이션 스무스 처리 ── */
+            /* ── 후기섹션 마우스 호버 애니메이션 (playbackRate로 완벽한 스무스 처리) ── */
             const testiWrap = document.querySelector('.testi-marquee-wrap');
             if (testiWrap) {
                 testiWrap.addEventListener('mouseenter', () => {
                     testiWrap.querySelectorAll('.testi-track').forEach(track => {
-                        track.style.setProperty('--marquee-speed', '100s');
+                        const animations = track.getAnimations();
+                        animations.forEach(animation => {
+                            animation.playbackRate = 0.58; // 느린 속도 (원래 58% 정도)
+                        });
                     });
                 });
                 testiWrap.addEventListener('mouseleave', () => {
                     testiWrap.querySelectorAll('.testi-track').forEach(track => {
-                        track.style.setProperty('--marquee-speed', '58s');
+                        const animations = track.getAnimations();
+                        animations.forEach(animation => {
+                            animation.playbackRate = 1; // 정상 속도
+                        });
                     });
                 });
             }
