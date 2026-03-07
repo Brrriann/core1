@@ -654,9 +654,12 @@
             width: max-content;
             padding: 10px 0;
         }
-        .testi-track.row-1 { animation: marquee-l 58s linear infinite; }
-        .testi-track.row-2 { animation: marquee-r 58s linear infinite; margin-top: 16px; }
-        .testi-marquee-wrap:hover .testi-track { animation-duration: 120s; }
+        .testi-track {
+            --marquee-speed: 58s;
+        }
+        .testi-track.row-1 { animation: marquee-l var(--marquee-speed) linear infinite; }
+        .testi-track.row-2 { animation: marquee-r var(--marquee-speed) linear infinite; margin-top: 16px; }
+        .testi-marquee-wrap:hover .testi-track { --marquee-speed: 100s; }
         @keyframes marquee-l { from{transform:translateX(0)} to{transform:translateX(-50%)} }
         @keyframes marquee-r { from{transform:translateX(-50%)} to{transform:translateX(0)} }
 
@@ -2697,6 +2700,21 @@
                 .from('.cta-main-title',  { opacity: 0, y: 44, duration: 1.05, ease: 'expo.out' }, '-=0.5')
                 .from('.cta-subtitle',    { opacity: 0, y: 32, duration: 0.95, ease: 'power3.out' }, '-=0.6')
                 .from('.cta-button-wrap', { opacity: 0, y: 24, duration: 0.9,  ease: 'power3.out' }, '-=0.55');
+
+            /* ── 후기섹션 마우스 호버 애니메이션 스무스 처리 ── */
+            const testiWrap = document.querySelector('.testi-marquee-wrap');
+            if (testiWrap) {
+                testiWrap.addEventListener('mouseenter', () => {
+                    testiWrap.querySelectorAll('.testi-track').forEach(track => {
+                        track.style.setProperty('--marquee-speed', '100s');
+                    });
+                });
+                testiWrap.addEventListener('mouseleave', () => {
+                    testiWrap.querySelectorAll('.testi-track').forEach(track => {
+                        track.style.setProperty('--marquee-speed', '58s');
+                    });
+                });
+            }
 
             /* ── Lightbox 이벤트 ── */
             document.getElementById('lightbox').addEventListener('click', function(e) {
