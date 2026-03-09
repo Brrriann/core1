@@ -782,6 +782,10 @@
             box-shadow:
                 0 24px 60px rgba(0,0,0,0.7),
                 0 1px 0 rgba(255,255,255,0.025) inset;
+            /* 초기 상태 숨김 */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease, visibility 0.8s;
         }
         @keyframes pulse-gold {
             0%,100% { transform:scale(1); box-shadow: 0 0 0 0 rgba(201,168,76,0.45); }
@@ -2904,6 +2908,9 @@
             }
 
             function enterMain() {
+                if (hasEntered) return;
+                hasEntered = true;
+
                 document.body.style.overflow = 'auto';
                 if (introOverlay) {
                     gsap.to(introOverlay, {
@@ -2913,6 +2920,13 @@
                         onComplete: () => {
                             introOverlay.style.display = 'none';
                             if (window.heroTimeline) window.heroTimeline.play();
+                            
+                            // 하단 바 노출
+                            const stickyBar = document.getElementById('sticky-bottom-bar');
+                            if (stickyBar) {
+                                stickyBar.style.visibility = 'visible';
+                                stickyBar.style.opacity = '1';
+                            }
                         }
                     });
                 }
