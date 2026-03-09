@@ -2782,6 +2782,7 @@
             /* ── Intro Video ── */
             const introVideo = document.getElementById('intro-video');
             const introOverlay = document.getElementById('intro-video-overlay');
+            const videoSource = document.getElementById('video-source');
 
             document.body.style.overflow = 'hidden';
 
@@ -2801,44 +2802,23 @@
                 }
             }
 
-            if (introVideo) {
+            if (introVideo && videoSource) {
                 const isMobile = window.innerWidth < 768;
                 const videoSrc = isMobile ? 'SAUCE/MOBILE_CORE.mp4' : 'SAUCE/CORE.mp4';
 
-                introVideo.src = videoSrc;
-                
-                // 1. 데이터가 충분히 쌓였을 때만 재생 시작
-                introVideo.addEventListener('canplaythrough', () => {
-                    introVideo.play().catch(() => enterMain());
-                }, { once: true });
+                // 소스 교체 및 로드
+                videoSource.src = videoSrc;
+                introVideo.load();
 
-                // 2. 재생 중 멈춤 감지 및 강제 재개 (Heartbeat)
-                let lastPos = -1;
-                const checkStuck = setInterval(() => {
-                    if (hasEntered) {
-                        clearInterval(checkStuck);
-                        return;
-                    }
-
-                    // 재생 중인데 시간이 안 흐르면 강제로 다시 play()
-                    if (!introVideo.paused && introVideo.currentTime === lastPos) {
-                        introVideo.play();
-                    }
-                    lastPos = introVideo.currentTime;
-                }, 200);
-
-                // 3. 비디오 종료 감지 (0.1초 전 선제 진입으로 끊김 방지)
-                introVideo.addEventListener('timeupdate', () => {
-                    if (introVideo.currentTime > 0 && introVideo.currentTime >= introVideo.duration - 0.1) {
-                        enterMain();
-                    }
-                });
-
+                // 영상이 끝나거나 에러가 나면 진입
                 introVideo.onended = enterMain;
                 introVideo.onerror = enterMain;
 
-                // 예외 상황 대비 (최대 4초 후 강제 진입)
-                setTimeout(enterMain, 4000);
+                // 브라우저 정책으로 재생이 막히는 경우 대비
+                introVideo.play().catch(() => enterMain());
+
+                // 어떤 경우에도 2.5초 후에는 강제 진입 (보험)
+                setTimeout(enterMain, 2500);
             } else {
                 enterMain();
             }
@@ -2847,7 +2827,9 @@
 
     <!-- Intro Video Overlay -->
     <div id="intro-video-overlay">
-        <video id="intro-video" autoplay muted playsinline preload="auto"></video>
+        <video id="intro-video" autoplay muted playsinline preload="auto">
+            <source id="video-source" src="SAUCE/CORE.mp4" type="video/mp4">
+        </video>
     </div>
 </body>
 </html>
