@@ -2805,18 +2805,40 @@
                 const isMobile = window.innerWidth < 768;
                 const videoSrc = isMobile ? 'SAUCE/MOBILE_CORE.mp4' : 'SAUCE/CORE.mp4';
 
-                // 비디오 속성 직접 설정
                 introVideo.src = videoSrc;
                 
-                // 재생 시도
-                introVideo.play().catch(() => enterMain());
+                // 1. 데이터가 충분히 쌓였을 때만 재생 시작
+                introVideo.addEventListener('canplaythrough', () => {
+                    introVideo.play().catch(() => enterMain());
+                }, { once: true });
 
-                // 영상이 끝나면 진입
+                // 2. 재생 중 멈춤 감지 및 강제 재개 (Heartbeat)
+                let lastPos = -1;
+                const checkStuck = setInterval(() => {
+                    if (hasEntered) {
+                        clearInterval(checkStuck);
+                        return;
+                    }
+
+                    // 재생 중인데 시간이 안 흐르면 강제로 다시 play()
+                    if (!introVideo.paused && introVideo.currentTime === lastPos) {
+                        introVideo.play();
+                    }
+                    lastPos = introVideo.currentTime;
+                }, 200);
+
+                // 3. 비디오 종료 감지 (0.1초 전 선제 진입으로 끊김 방지)
+                introVideo.addEventListener('timeupdate', () => {
+                    if (introVideo.currentTime > 0 && introVideo.currentTime >= introVideo.duration - 0.1) {
+                        enterMain();
+                    }
+                });
+
                 introVideo.onended = enterMain;
-                
-                // [핵심] 영상이 멈추거나 끊길 경우를 대비해 1.5초 후 자동 진입 시작
-                // 영상 자체가 짧으므로 1.5초면 충분히 메시지 전달이 가능합니다.
-                setTimeout(enterMain, 1500);
+                introVideo.onerror = enterMain;
+
+                // 예외 상황 대비 (최대 4초 후 강제 진입)
+                setTimeout(enterMain, 4000);
             } else {
                 enterMain();
             }
@@ -2825,7 +2847,7 @@
 
     <!-- Intro Video Overlay -->
     <div id="intro-video-overlay">
-        <video id="intro-video" autoplay muted playsinline></video>
+        <video id="intro-video" autoplay muted playsinline preload="auto"></video>
     </div>
 </body>
 </html>
