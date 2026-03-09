@@ -2874,39 +2874,6 @@
                 }
             }
 
-            if (introText) {
-                // 각 글자를 span으로 분리
-                const lines = introText.querySelectorAll('div');
-                lines.forEach(line => {
-                    const text = line.innerText;
-                    line.innerHTML = text.split('').map(char => 
-                        `<span class="intro-char">${char === ' ' ? '&nbsp;' : char}</span>`
-                    ).join('');
-                });
-
-                const chars = document.querySelectorAll('.intro-char');
-                const tl = gsap.timeline({
-                    onComplete: () => {
-                        setTimeout(enterMain, 1000); // 전체 텍스트 노출 후 1초 대기
-                    }
-                });
-
-                // 불규칙하게 한 글자씩 나타나는 효과
-                tl.to(chars, {
-                    opacity: 1,
-                    filter: 'blur(0px)',
-                    y: 0,
-                    duration: 0.8,
-                    stagger: {
-                        each: 0.08,
-                        from: "random" // 불규칙하게 나타나도록 설정
-                    },
-                    ease: "power2.out"
-                });
-            } else {
-                enterMain();
-            }
-
             let hasEntered = false;
             function enterMain() {
                 if (hasEntered) return;
@@ -2921,7 +2888,7 @@
                         onComplete: () => {
                             introOverlay.style.display = 'none';
                             if (window.heroTimeline) window.heroTimeline.play();
-                            
+
                             // 하단 바 노출
                             const stickyBar = document.getElementById('sticky-bottom-bar');
                             if (stickyBar) {
@@ -2930,7 +2897,50 @@
                             }
                         }
                     });
+                } else {
+                    // Fallback if overlay doesn't exist
+                    if (window.heroTimeline) window.heroTimeline.play();
                 }
+            }
+
+            // Intro animation
+            if (introText) {
+                const lines = introText.querySelectorAll('div');
+                lines.forEach(line => {
+                    const text = line.innerText;
+                    line.innerHTML = text.split('').map(char =>
+                        `<span class="intro-char">${char === ' ' ? '&nbsp;' : char}</span>`
+                    ).join('');
+                });
+
+                const chars = document.querySelectorAll('.intro-char');
+                if (chars.length > 0) {
+                    const tl = gsap.timeline({
+                        onComplete: () => {
+                            setTimeout(enterMain, 1000);
+                        }
+                    });
+
+                    tl.to(chars, {
+                        opacity: 1,
+                        filter: 'blur(0px)',
+                        y: 0,
+                        duration: 0.8,
+                        stagger: {
+                            each: 0.08,
+                            from: "random"
+                        },
+                        ease: "power2.out"
+                    });
+
+                    // Fallback timeout: ensure enterMain is called even if animation fails
+                    const maxWaitTime = Math.max(5000, chars.length * 100 + 2000);
+                    setTimeout(() => enterMain(), maxWaitTime);
+                } else {
+                    enterMain();
+                }
+            } else {
+                enterMain();
             }
         });
     </script>
