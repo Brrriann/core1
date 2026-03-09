@@ -1632,12 +1632,20 @@
 
     <!-- ── Side Navigation ── -->
     <div id="side-nav">
-        <div class="nav-dot active" data-section="0"><div class="dot-circle"></div></div>
-        <div class="nav-dot" data-section="1"><div class="dot-circle"></div></div>
-        <div class="nav-dot" data-section="2"><div class="dot-circle"></div></div>
-        <div class="nav-dot" data-section="3"><div class="dot-circle"></div></div>
-        <div class="nav-dot" data-section="4"><div class="dot-circle"></div></div>
-        <div class="nav-dot" data-section="5"><div class="dot-circle"></div></div>
+        <div class="nav-dot active" data-section="sec-0"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="sec-1"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="sec-2"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="sec-3"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="sec-4"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="sec-5"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="sec-6"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="sec-7"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="sec-8"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="sec-a"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="sec-b"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="sec-d"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="sec-9"><div class="dot-circle"></div></div>
+        <div class="nav-dot" data-section="sec-form"><div class="dot-circle"></div></div>
     </div>
 
     <!-- ── Top Navigation ── -->
@@ -1649,8 +1657,9 @@
             <ul class="hidden lg:flex items-center space-x-10">
                 <li><a href="#sec-1" class="nav-link">사무소 철학</a></li>
                 <li><a href="#sec-2" class="nav-link">업무분야</a></li>
-                <li><a href="#sec-5" class="nav-link">증거채택자료</a></li>
-                <li><a href="https://open.kakao.com/o/sZR3WIMh" target="_blank" rel="noopener" class="nav-link nav-cta">상담문의</a></li>
+                <li><a href="#sec-6" class="nav-link">증거채택자료</a></li>
+                <li><a href="#sec-8" class="nav-link">FAQ</a></li>
+                <li><a href="#sec-form" class="nav-link nav-cta">상담문의</a></li>
             </ul>
             <div class="nav-phone hidden md:block">010.7617.7978</div>
         </div>
@@ -2795,20 +2804,28 @@
             });
 
             /* Side navigation */
-            gsap.utils.toArray('.nav-dot').forEach((dot, i) => {
+            document.querySelectorAll('.nav-dot').forEach(dot => {
+                const sectionId = dot.getAttribute('data-section');
+                const targetSection = document.getElementById(sectionId);
+
+                // 클릭 시 이동
                 dot.addEventListener('click', () => {
-                    document.getElementById(`sec-${i}`)?.scrollIntoView({ behavior: 'smooth' });
+                    targetSection?.scrollIntoView({ behavior: 'smooth' });
                 });
-                ScrollTrigger.create({
-                    trigger: `#sec-${i}`,
-                    start: 'top center',
-                    end: 'bottom center',
-                    onToggle: self => {
-                        if (!self.isActive) return;
-                        document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('active'));
-                        dot.classList.add('active');
-                    }
-                });
+
+                // 스크롤 시 활성화
+                if (targetSection) {
+                    ScrollTrigger.create({
+                        trigger: targetSection,
+                        start: 'top center',
+                        end: 'bottom center',
+                        onToggle: self => {
+                            if (!self.isActive) return;
+                            document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('active'));
+                            dot.classList.add('active');
+                        }
+                    });
+                }
             });
 
             /* Counter animation for hero stat */
