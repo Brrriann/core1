@@ -24,7 +24,15 @@
       "Bash(identify \"C:\\\\Users\\\\offic\\\\OneDrive\\\\바탕 화면\\\\CORETAMJUNG\\\\PROVE\\\\1.png\")",
       "Bash(git init)",
       "Bash(git config user.name \"Brriann\")",
-      "Bash(git config user.email \"your-email@example.com\")"
+      "Bash(git config user.email \"your-email@example.com\")",
+      "Bash(git push -u origin main --force)",
+      "Bash(git add index.html)",
+      "Bash(git commit:*)",
+      "Bash(git push origin main)",
+      "WebFetch(domain:core1.pages.dev)",
+      "Bash(gh api repos/Brrriann/core1/commits/main --jq '.sha, .commit.message, .commit.author.date')",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }
