@@ -285,14 +285,15 @@
         }
 
         #hero-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             line-height: 1.18;
             font-weight: 900;
             letter-spacing: -0.02em;
             font-size: clamp(2.6rem, 5.8vw, 5.8rem);
             margin-bottom: 1.6rem;
+            opacity: 0;
         }
-        .char { display: inline-block; opacity: 0; transform: translateY(26px) rotateX(-90deg); will-change: transform, opacity; }
+        .char { display: inline-block; opacity: 0; transform: translateY(26px) rotateX(-90deg); }
         .gold-point {
             color: var(--gold);
             font-style: normal;
@@ -337,7 +338,7 @@
             background: rgba(255,255,255,0.07);
         }
         .h-stat-num {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: 1.33rem;
             font-weight: 900;
             color: var(--gold);
@@ -368,7 +369,7 @@
             overflow: hidden;
         }
         #intro-text {
-            font-family: 'Noto Serif KR', serif;
+            font-family: 'Noto Serif KR', '돋움', serif;
             font-size: clamp(1.8rem, 5vw, 3.2rem);
             font-weight: 800;
             line-height: 1.6;
@@ -376,10 +377,11 @@
             color: #fff;
             letter-spacing: 0.05em;
             word-break: keep-all;
+            opacity: 0;
         }
         #intro-text div { margin-bottom: 0.5rem; }
         #intro-text .gold { color: var(--gold); }
-        .intro-char { opacity: 0; display: inline-block; filter: blur(10px); transform: translateY(10px); }
+        .intro-char { opacity: 0; display: inline-block; filter: blur(10px); transform: translateY(10px); backface-visibility: hidden; }
 
         /* ── Smoke Effect ── */
         .smoke-container {
@@ -446,7 +448,7 @@
 
         /* Section title */
         .section-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: clamp(2rem, 4vw, 3.6rem);
             font-weight: 900;
             line-height: 1.12;
@@ -491,7 +493,7 @@
         .cert-num {
             position: absolute;
             top: -40px; right: -4px;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: 52px;
             font-weight: 900;
             font-style: normal;
@@ -565,7 +567,7 @@
             text-transform: uppercase;
         }
         .section-h2 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: clamp(1.9rem, 3.8vw, 3.4rem);
             font-weight: 900;
             letter-spacing: -0.025em;
@@ -636,7 +638,7 @@
             opacity: 0.85;
         }
         .result-status {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: 20px;
             font-weight: 700;
             color: white;
@@ -724,7 +726,7 @@
             transform: translateY(-6px);
         }
         .testi-quote {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: 54px;
             color: var(--gold);
             opacity: 0.22;
@@ -868,7 +870,7 @@
         .sec6-header { text-align: center; margin-bottom: 72px; }
         .sec6-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: white; margin-bottom: 1.2rem; }
         .sec6-eyebrow span { width: 28px; height: 1px; background: white; opacity: 0.6; }
-        .sec6-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 900; color: white; line-height: 1.15; }
+        .sec6-title { font-family: 'Playfair Display', 'Times New Roman', serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 900; color: white; line-height: 1.15; }
         .sec6-title em { color: var(--gold); font-style: normal; }
         .prove-carousel-wrap {
             width: 100%;
@@ -911,14 +913,14 @@
             background: white;
         }
         .prove-card-number {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: 48px;
             font-weight: 900;
             color: #3B82F6;
             margin-bottom: 24px;
         }
         .prove-card-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: 24px;
             font-weight: 700;
             color: #070707;
@@ -987,7 +989,7 @@
         }
         /* 좌측 숫자 */
         .sit-num {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: 28px; font-weight: 900;
             color: var(--gold); opacity: 0.2;
             line-height: 1; user-select: none;
@@ -1108,7 +1110,7 @@
         }
         #sec-b-cards > div:hover > div > div { transform: scale(1.1); }
         #sec-b-cards h3 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: 17px;
             color: white;
             font-weight: 700;
@@ -1225,7 +1227,7 @@
         .lightbox { position: fixed; inset: 0; z-index: 999999; background: rgba(4,4,4,0.95); display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
         .lightbox.open { display: flex; }
         .lightbox img { max-width: 88vw; max-height: 88vh; border-radius: 10px; object-fit: contain; }
-        .lightbox-close { position: absolute; top: 28px; right: 32px; font-size: 28px; color: var(--gold); cursor: pointer; background: none; border: none; font-family: 'Playfair Display', serif; line-height: 1; }
+        .lightbox-close { position: absolute; top: 28px; right: 32px; font-size: 28px; color: var(--gold); cursor: pointer; background: none; border: none; font-family: 'Playfair Display', 'Times New Roman', serif; line-height: 1; }
 
         /* ── Legal Modal ── */
         .legal-modal { position: fixed; inset: 0; z-index: 999999; background: rgba(4,4,4,0.96); display: none; align-items: center; justify-content: center; backdrop-filter: blur(12px); padding: 20px; }
@@ -1247,7 +1249,7 @@
         .sec7-header { text-align: center; margin-bottom: 80px; }
         .sec7-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--corp-accent); margin-bottom: 1.2rem; }
         .sec7-eyebrow span { width: 28px; height: 1px; background: var(--corp-accent); opacity: 0.6; }
-        .sec7-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 900; color: white; line-height: 1.15; }
+        .sec7-title { font-family: 'Playfair Display', 'Times New Roman', serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 900; color: white; line-height: 1.15; }
         /* Pulse 애니메이션 (1초 스케일 = 4초 총 주기) */
         @keyframes pulseCard {
             0%, 100% { transform: scale(1); }
@@ -1378,7 +1380,7 @@
         .sec8-header { text-align: center; margin-bottom: 64px; }
         .sec8-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
         .sec8-eyebrow span { width: 28px; height: 1px; background: var(--gold); opacity: 0.6; }
-        .sec8-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 900; color: white; }
+        .sec8-title { font-family: 'Playfair Display', 'Times New Roman', serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 900; color: white; }
         .faq-list { display: flex; flex-direction: column; }
         .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); transition: border-color 0.3s; }
         .faq-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
@@ -1390,7 +1392,7 @@
             user-select: none;
         }
         .faq-q-text { display: flex; align-items: baseline; gap: 14px; flex: 1; }
-        .faq-label { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--gold); flex-shrink: 0; font-style: normal; }
+        .faq-label { font-family: 'Playfair Display', 'Times New Roman', serif; font-size: 18px; font-weight: 700; color: var(--gold); flex-shrink: 0; font-style: normal; }
         .faq-q-content { font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 600; color: rgba(237,232,223,0.85); transition: color 0.25s; line-height: 1.5; }
         .faq-item.active .faq-q-content { color: white; }
         .faq-arrow {
@@ -1427,7 +1429,7 @@
         }
         .form-eyebrow-line { width: 28px; height: 1px; background: var(--gold); }
         #form-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: clamp(1.8rem, 3.5vw, 2.6rem);
             font-weight: 900; color: white;
             line-height: 1.25; margin-bottom: 0.8rem;
@@ -1523,7 +1525,7 @@
             margin: 0 auto 2rem;
         }
         .cta-main-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: clamp(2.4rem, 5.5vw, 4rem);
             font-weight: 900; color: white;
             line-height: 1.18; margin-bottom: 1.6rem;
@@ -2354,7 +2356,7 @@
 
             </div>
             <div style="text-align:center;margin-top:4rem;" id="sec-a-cta">
-                <p style="font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);font-weight:700;margin-bottom:1.5rem;">하나라도 해당되신다면,<br>지금 무료 상담을 받아보세요.</p>
+                <p style="font-family:'Playfair Display','Times New Roman',serif;font-size:20px;color:var(--gold);font-weight:700;margin-bottom:1.5rem;">하나라도 해당되신다면,<br>지금 무료 상담을 받아보세요.</p>
                 <p style="font-family:'Noto Sans KR',sans-serif;font-size:14px;color:rgba(237,232,223,0.7);line-height:1.6;">말씀하기 어려운 내용일수록 저희는 더 조심스럽게 듣겠습니다.</p>
             </div>
         </div>
@@ -2413,18 +2415,18 @@
             </div>
             <div id="sec-d-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.5rem;">
                 <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:16px;padding:3rem;backdrop-filter:blur(10px);transition:all 0.3s ease;">
-                    <div style="font-family:'Playfair Display',serif;font-size:56px;color:var(--gold);font-weight:900;margin-bottom:1.5rem;opacity:0.3;">1</div>
-                    <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:white;font-weight:700;margin-bottom:1.5rem;">자격증이 있는 탐정입니다.</h3>
+                    <div style="font-family:'Playfair Display','Times New Roman',serif;font-size:56px;color:var(--gold);font-weight:900;margin-bottom:1.5rem;opacity:0.3;">1</div>
+                    <h3 style="font-family:'Playfair Display','Times New Roman',serif;font-size:22px;color:white;font-weight:700;margin-bottom:1.5rem;">자격증이 있는 탐정입니다.</h3>
                     <p style="font-family:'Noto Sans KR',sans-serif;font-size:15px;color:rgba(237,232,223,0.8);line-height:1.8;">대한민국에서 공인 탐정 자격을 보유한 곳은 많지 않습니다. 코어탐정은 복수의 공인 자격과 15년 현장 경력을 함께 갖추고 있습니다.</p>
                 </div>
                 <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:16px;padding:3rem;backdrop-filter:blur(10px);transition:all 0.3s ease;">
-                    <div style="font-family:'Playfair Display',serif;font-size:56px;color:var(--gold);font-weight:900;margin-bottom:1.5rem;opacity:0.3;">2</div>
-                    <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:white;font-weight:700;margin-bottom:1.5rem;">수집한 자료가 실제로 쓰입니다.</h3>
+                    <div style="font-family:'Playfair Display','Times New Roman',serif;font-size:56px;color:var(--gold);font-weight:900;margin-bottom:1.5rem;opacity:0.3;">2</div>
+                    <h3 style="font-family:'Playfair Display','Times New Roman',serif;font-size:22px;color:white;font-weight:700;margin-bottom:1.5rem;">수집한 자료가 실제로 쓰입니다.</h3>
                     <p style="font-family:'Noto Sans KR',sans-serif;font-size:15px;color:rgba(237,232,223,0.8);line-height:1.8;">법정에서 증거로 채택되지 않는 자료는 의미가 없습니다. 코어탐정은 법률 자문과 함께 처음부터 법적 효력을 고려해 자료를 수집합니다.</p>
                 </div>
                 <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:16px;padding:3rem;backdrop-filter:blur(10px);transition:all 0.3s ease;">
-                    <div style="font-family:'Playfair Display',serif;font-size:56px;color:var(--gold);font-weight:900;margin-bottom:1.5rem;opacity:0.3;">3</div>
-                    <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:white;font-weight:700;margin-bottom:1.5rem;">비밀은 끝까지 지킵니다.</h3>
+                    <div style="font-family:'Playfair Display','Times New Roman',serif;font-size:56px;color:var(--gold);font-weight:900;margin-bottom:1.5rem;opacity:0.3;">3</div>
+                    <h3 style="font-family:'Playfair Display','Times New Roman',serif;font-size:22px;color:white;font-weight:700;margin-bottom:1.5rem;">비밀은 끝까지 지킵니다.</h3>
                     <p style="font-family:'Noto Sans KR',sans-serif;font-size:15px;color:rgba(237,232,223,0.8);line-height:1.8;">상담 사실, 의뢰 내용, 수사 과정 — 어느 것도 유출되지 않습니다. 국가공인 보안 관리사 자격을 보유한 전문가가 직접 보안을 관리합니다.</p>
                 </div>
             </div>
@@ -2617,6 +2619,7 @@
 
         /* ── 텍스트 분해 ── */
         function splitTextSafe(el) {
+            if (!el) return;
             let html = '';
             Array.from(el.childNodes).forEach(node => {
                 if (node.nodeType === 3) {
@@ -2633,7 +2636,17 @@
                 }
             });
             el.innerHTML = html;
-            el.style.opacity = '1';
+        }
+
+        /* 웹폰트 로드 완료 대기 */
+        function waitForWebFont() {
+            return new Promise(resolve => {
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(resolve);
+                } else {
+                    setTimeout(resolve, 500);
+                }
+            });
         }
 
         /* ── 블로그 링크 디바이스 분기 ── */
@@ -2646,9 +2659,13 @@
         window.addEventListener('resize', () => { clearTimeout(_rt); _rt = setTimeout(updateBlogLink, 200); });
 
         /* ── DOMContentLoaded ── */
-        window.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('DOMContentLoaded', async () => {
             updateBlogLink();
+
+            // 웹폰트 로드 완료 후 텍스트 분할 (깜빡거림 방지)
+            await waitForWebFont();
             splitTextSafe(document.getElementById('hero-title'));
+            document.getElementById('hero-title').style.opacity = '1';
 
             /* Hero BG Ken Burns */
             gsap.to('#hero-bg-img', { scale: 1.1, duration: 13, repeat: -1, yoyo: true, ease: 'sine.inOut' });
@@ -2903,7 +2920,7 @@
                 }
             }
 
-            // Intro animation
+            // Intro animation - wait for web fonts before starting
             if (introText) {
                 const lines = introText.querySelectorAll('div');
                 lines.forEach(line => {
@@ -2912,6 +2929,9 @@
                         `<span class="intro-char">${char === ' ' ? '&nbsp;' : char}</span>`
                     ).join('');
                 });
+
+                // Show intro text after font load
+                introText.style.opacity = '1';
 
                 const chars = document.querySelectorAll('.intro-char');
                 if (chars.length > 0) {
