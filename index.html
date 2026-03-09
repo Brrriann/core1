@@ -338,26 +338,32 @@
             text-transform: uppercase;
         }
 
-        /* ══ INTRO VIDEO OVERLAY ══ */
+        /* ══ INTRO OVERLAY ══ */
         #intro-video-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--black);
-            z-index: 9999;
+            background: #000;
+            z-index: 99999;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            will-change: opacity;
         }
-        #intro-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        #intro-text {
+            font-family: 'Noto Serif KR', serif;
+            font-size: clamp(1.8rem, 5vw, 3.2rem);
+            line-height: 1.6;
+            text-align: center;
+            color: #fff;
+            letter-spacing: 0.05em;
+            word-break: keep-all;
         }
+        #intro-text div { margin-bottom: 0.5rem; }
+        #intro-text .gold { color: var(--gold); }
+        .intro-char { opacity: 0; display: inline-block; filter: blur(10px); transform: translateY(10px); }
         @keyframes fadeOutVideo {
             from {
                 opacity: 1;
@@ -2779,57 +2785,70 @@
                 statCounterEl.textContent = counter.toLocaleString('en-US');
             }, 4000);
 
-            /* ── Intro Video ── */
-            const introVideo = document.getElementById('intro-video');
+            /* ── Intro Text Animation ── */
             const introOverlay = document.getElementById('intro-video-overlay');
-            const videoSource = document.getElementById('video-source');
-
+            const introText = document.getElementById('intro-text');
+            
             document.body.style.overflow = 'hidden';
 
-            let hasEntered = false;
-            function enterMain() {
-                if (hasEntered) return;
-                hasEntered = true;
+            if (introText) {
+                // 각 글자를 span으로 분리
+                const lines = introText.querySelectorAll('div');
+                lines.forEach(line => {
+                    const text = line.innerText;
+                    line.innerHTML = text.split('').map(char => 
+                        `<span class="intro-char">${char === ' ' ? '&nbsp;' : char}</span>`
+                    ).join('');
+                });
 
-                document.body.style.overflow = 'auto';
-                if (introOverlay) {
-                    introOverlay.style.transition = 'opacity 0.8s ease-out';
-                    introOverlay.style.opacity = '0';
-                    setTimeout(() => {
-                        introOverlay.style.display = 'none';
-                        if (window.heroTimeline) window.heroTimeline.play();
-                    }, 800);
-                }
-            }
+                const chars = document.querySelectorAll('.intro-char');
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        setTimeout(enterMain, 1000); // 전체 텍스트 노출 후 1초 대기
+                    }
+                });
 
-            if (introVideo && videoSource) {
-                const isMobile = window.innerWidth < 768;
-                const videoSrc = isMobile ? 'SAUCE/MOBILE_CORE.mp4' : 'SAUCE/CORE.mp4';
-
-                // 소스 교체 및 로드
-                videoSource.src = videoSrc;
-                introVideo.load();
-
-                // 영상이 끝나거나 에러가 나면 진입
-                introVideo.onended = enterMain;
-                introVideo.onerror = enterMain;
-
-                // 브라우저 정책으로 재생이 막히는 경우 대비
-                introVideo.play().catch(() => enterMain());
-
-                // 어떤 경우에도 2.5초 후에는 강제 진입 (보험)
-                setTimeout(enterMain, 2500);
+                // 불규칙하게 한 글자씩 나타나는 효과
+                tl.to(chars, {
+                    opacity: 1,
+                    filter: 'blur(0px)',
+                    y: 0,
+                    duration: 0.8,
+                    stagger: {
+                        each: 0.08,
+                        from: "random" // 불규칙하게 나타나도록 설정
+                    },
+                    ease: "power2.out"
+                });
             } else {
                 enterMain();
+            }
+
+            function enterMain() {
+                document.body.style.overflow = 'auto';
+                if (introOverlay) {
+                    gsap.to(introOverlay, {
+                        opacity: 0,
+                        duration: 1.2,
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                            introOverlay.style.display = 'none';
+                            if (window.heroTimeline) window.heroTimeline.play();
+                        }
+                    });
+                }
             }
         });
     </script>
 
-    <!-- Intro Video Overlay -->
+    <!-- Intro Overlay -->
     <div id="intro-video-overlay">
-        <video id="intro-video" autoplay muted playsinline preload="auto">
-            <source id="video-source" src="SAUCE/CORE.mp4" type="video/mp4">
-        </video>
+        <div id="intro-text">
+            <div>다음은</div>
+            <div>늦습니다</div>
+            <div class="gold">지금 바로</div>
+            <div class="gold">상담하셔야 합니다.</div>
+        </div>
     </div>
 </body>
 </html>
