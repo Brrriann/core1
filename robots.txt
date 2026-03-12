@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://coretamjung.com/sitemap.xml
+
 #DaumWebMasterTool:aea3b8c619447bc11b8aac3f175d9964aaf28a7cbf6effd0c5ce30a7c22f64bc:P8zQZAaDab8Pq7CTStNVnQ==
